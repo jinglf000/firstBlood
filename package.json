@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/jinglf000/firstBlood#readme",
   "devDependencies": {
-    "bootstrap": "^3.3.7"
+    "bootstrap-sass": "^3.3.7"
   }
 }
