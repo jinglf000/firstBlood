@@ -1,0 +1,25 @@
+{
+  "name": "firstBlood",
+  "version": "1.0.0",
+  "description": "贵阳项目解决方案",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinglf000/firstBlood.git"
+  },
+  "keywords": [
+    "贵阳"
+  ],
+  "author": "jinglf000",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jinglf000/firstBlood/issues"
+  },
+  "homepage": "https://github.com/jinglf000/firstBlood#readme",
+  "devDependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
