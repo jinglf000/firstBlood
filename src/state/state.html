@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS 有限状态机</title>
+    <link rel="stylesheet" href="../assest/bootstrap/dist/css/bootstrap.css">
+    <style>
+        nav{
+            margin-left: -15px;
+            margin-right: -15px;
+            background-color: #fafbfc;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        .main-width{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .switch-btn{
+            position: relative;
+            top: 1px;
+            font-size: 16px;
+            font-weight: lighter;
+            text-align: center;
+            cursor: pointer;
+            padding-top: 30px;
+            line-height: 2.5;
+        }
+        .switch-btn > span {
+            border-width: 3px 1px 1px ;
+            border-style: solid;
+            border-radius: 3px 3px 0 0 ;
+            border-color: transparent;
+            transition: all .5s ease;
+        }
+        .switch-btn .choiced-btn{
+            background-color: #fff;
+            color: #24292e;
+            border-color: #e36209 #e1e4e8 transparent;
+        }
+        .switch-con{
+            margin-top: 10px;
+        }
+        .switch-con > div{
+            display: none;
+            line-height: 2;
+        }
+        .switch-con .choiced-con{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <nav>
+            <div class="row switch-btn main-width" id="switch-btn">
+                <span class="col-md-2 ">栏目1</span>
+                <span class="col-md-2">栏目2</span>
+                <span class="col-md-2">栏目3</span>
+            </div>
+        </nav>
+        <main>
+            <div class="row switch-con main-width" id="switch-con">
+                <div class="col-md-12 choiced-con">内容1</div>
+                <div class="col-md-12">内容2</div>
+                <div class="col-md-12">内容3</div>
+            </div>
+        </main>
+    </div>
+    <script src="../assest/jquery/jquery.min.js"></script>
+    <script src="../assest/vue/dist/vue.js"></script>
+    <script src="../assest/vuex/dist/vuex.js"></script>
+    <script type="text/sample">
+        $(function(){
+
+            var tab = {
+                currentState : 0,
+                $btn : $("#switch-btn"),
+                $btnList : $("#switch-btn span"),
+                BTN_ON : 'choiced-btn',
+                $con : $("#switch-con"),
+                $conList : $("#switch-con div"),
+                CON_ON : 'choiced-con',
+                initial : function(){
+                    var self = this;
+                    self.$btn.on("click",self.transition);
+                },
+                transition : function(e){
+                    var $this = $(this),
+                        num   = $(e.target).index();
+                        if(num === tab.currentState)return;
+                    tab.switchFn(num);
+                },
+                switchFn : function(num){
+                    tab.currentState = num;
+                    tab.$btnList.removeClass(tab.BTN_ON)
+                        .eq(num).addClass(tab.BTN_ON);
+                    tab.$conList.removeClass(tab.CON_ON)
+                        .eq(num).addClass(tab.CON_ON);
+                }
+            }
+            tab.initial();
+            tab.switchFn(1);
+
+            
+        });
+    </script>
+    <script>
+        // 使用Uix 进行状态管理
+        function Uix(obj){
+            if($ === undefined){
+                console.error("Uix need jQuery");
+            }
+            var state = {};
+            $.extend(state,obj.state,true);
+            this.getState = function(){
+                return state;
+            }
+            this.mutation = obj.mutation;
+
+            obj = null;
+            return this;
+        }
+
+        Uix.prototype.commit = function(type,obj){
+            var fn = this.mutation[type];
+            if( fn ){
+                fn.call(this,this.getState(),obj)
+            }
+        }
+
+        var tabState = new Uix({
+            state : {
+                tab : 0,
+                BTN_ON : 'choiced-btn',
+                CON_ON : 'choiced-con'
+            },
+            mutation : {
+                changeTab : function(state,num){
+                    if(state.tab === num)return;
+                    $("#switch-btn span").removeClass(state.BTN_ON)
+                        .eq(num).addClass(state.BTN_ON);
+                    $("#switch-con div").removeClass(state.CON_ON)
+                        .eq(num).addClass(state.CON_ON);
+                    state.tab = num;
+                }
+            }
+        });
+        $("#switch-btn").on('click',function(e){
+            tabState.commit('changeTab',$(e.target).index());
+        });
+        tabState.commit('changeTab',2);
+
+        var timer = setInterval(function(){
+            var num = tabState.getState().tab;
+            tabState.commit('changeTab', num > 1 ? 0 :  ++num);
+        },1000);
+        clearInterval(timer);
+    </script>
+</body>
+</html>
