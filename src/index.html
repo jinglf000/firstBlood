@@ -5,102 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge;chrome=1">
     <meta name="renderer" content="webkit">
-    <link rel="alternate" media="only screen and (max-width:640px)" href="https://www.baidu.com">
-    <title>JS 有限状态机</title>
+    <meta http-equiv="Pragma"  content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>贵阳</title>
     <link rel="stylesheet" href="./assest/bootstrap/dist/css/bootstrap.css">
-    <style>
-        nav{
-            margin-left: -15px;
-            margin-right: -15px;
-            background-color: #fafbfc;
-            border-bottom: 1px solid #e1e4e8;
-        }
-        .main-width{
-            width: 1000px;
-            margin: 0 auto;
-        }
-        .switch-btn{
-            position: relative;
-            top: 1px;
-            font-size: 16px;
-            font-weight: lighter;
-            text-align: center;
-            cursor: pointer;
-            padding-top: 30px;
-            line-height: 2.5;
-        }
-        .switch-btn > span {
-            border-width: 3px 1px 1px ;
-            border-style: solid;
-            border-radius: 3px 3px 0 0 ;
-            border-color: transparent;
-        }
-        .switch-btn .choiced-btn{
-            background-color: #fff;
-            color: #24292e;
-            border-color: #e36209 #e1e4e8 transparent;
-        }
-        .switch-con{
-            margin-top: 10px;
-        }
-        .switch-con > div{
-            display: none;
-            line-height: 2;
-        }
-        .switch-con .choiced-con{
-            display: block;
-        }
-
-        .box{
-            display: none;
-            position: absolute;
-            /*top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;*/
-            width: 400px;
-            height: 400px;
-            top: 50%;
-            left: 50%;
-            margin-left: -200px;
-            margin-right: -200px;
-            background-color: #ccc;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px #ccc;
-        }
-        .div-fix{
-            display: none;
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            border-radius: 12px;
-            background-color: #2997d0;  
-            /*left: 50%;
-            top: 50%;
-            margin-left: -100px;
-            margin-top: -100px;*/
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-        }
-    </style>
+    <link rel="stylesheet" href="./assest/css/index.css">
 </head>
 <body>
     <div class="container-fluid">
         <nav>
             <div class="row switch-btn main-width" id="switch-btn">
-                <span class="col-md-2 ">栏目1</span>
-                <span class="col-md-2">栏目2</span>
+                <span class="col-md-2 ">目录</span>
+                <span class="col-md-2">icon图标</span>
                 <span class="col-md-2">栏目3</span>
             </div>
         </nav>
         <main>
             <div class="row switch-con main-width" id="switch-con">
-                <div class="col-md-12 choiced-con">内容1</div>
-                <div class="col-md-12">内容2</div>
+                <div class="col-md-12 choiced-con row">
+                    <nav>
+                        <ul>
+                            <li><a href="./yang/yang.html">贵阳人力资源网</a></li>
+                            <li><a href="./state/state.html">有限状态机</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-12">
+                    <div>
+                       <div class="row">                            <p>
+                                <span class="icon-font icon-follow"></span>    
+                                <span>字体图标示例</span>
+                            </p>
+                            <p>通过zeplin导出对应的svg图标，上传到<a href="http://iconfont.cn">iconfont.cn</a>制作出对应的字体图标，更新图标，下载使用（图标内容地址为iconfont提供）</p>
+                        </div>
+                        <div class="row">
+                            <table class="table table-hover">
+                                <caption>bootstrap的表格</caption>
+                                <thead>
+                                    <tr >
+                                        <th>#</th>
+                                        <th>姓名</th>
+                                        <th>年龄</th>
+                                        <th>身高</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr >
+                                        <td>1</td>
+                                        <td>周霖</td>
+                                        <td>23</td>
+                                        <td>165</td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>2</td>
+                                        <td>荆龙飞</td>
+                                        <td>24</td>
+                                        <td>180</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>孙欣然</td>
+                                        <td>26</td>
+                                        <td>170</td>
+                                    </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <h3>form表单</h3>
+                            <form action="" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="username" class="col-md-3 control-label">Username</label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="username" class="form-control" placeholder="username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" id="password" class="form-control" placeholder="passworld">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox">remember me</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-12">内容3</div>
             </div>
         </main>
@@ -198,7 +194,7 @@
                 }
             }
             tab.initial();
-            tab.switchFn(1);
+            tab.switchFn(0);
         });
     </script>
 </body>
