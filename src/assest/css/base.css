@@ -1,0 +1,114 @@
+/**
+ * @author jinglf000
+ * 公用css
+ *
+*/
+article,aside,details,figcaption,figure,footer,header,main,nav,section,summary {
+    display: block
+}
+audio,canvas,video {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+}
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+html{
+    font-size: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+html,button,input,select,textarea {
+    font-family: 'Microsoft YaHei' , sans-serif;
+}
+body{
+    background-color: #f2f2f2;
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 281827 */
+    src: url('//at.alicdn.com/t/font_o3yhc7qcva6skyb9.eot');
+    src: url('//at.alicdn.com/t/font_o3yhc7qcva6skyb9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_o3yhc7qcva6skyb9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_o3yhc7qcva6skyb9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_o3yhc7qcva6skyb9.svg#iconfont') format('svg');
+}
+.iconfont {
+    font-family: 'iconfont' !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-arrow-down:after{
+    content: '\e8f2';
+}
+.container{
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-blue-lighter{
+    color: #fff;
+    background-color:  #62abff;
+    border-color: #62abff;
+}
+.btn-blue-lighter:hover,
+.btn-blue-lighter:focus{
+    color: #fff;
+    background-color: #4a9dfd;
+    border-color: #4a9dfd;
+}
+.btn-blue-lighter:active{
+    background-color: #548ed2;
+    background-position: 0 -15px;
+}
+/*顶部工具条*/
+.site-topbar{
+    position: relative;
+    height: 40px;
+    background-color: #333;
+    color: #cecece;
+}
+.site-topbar a{
+    color: #cecece;
+}
+.site-topbar a:hover{
+    color: #fff;
+}
+.site-topbar .iconfont{
+    padding-right: 10px;
+}
+.site-topbar .sep{
+    padding: 10px;
+}
+.topbar-nav,
+.topbar-info{
+    line-height: 40px;
+    height: 40px;
+}
+.topbar-nav{
+    float: left;
+}
+.topbar-info{
+    float: right;
+}
+.topbar-info i.icon-arrow-down{
+    padding-left: 5px;
+}
+/*一级导航*/
+.site-header{
+    height: 80px;
+    background-color: #fff; 
+}
+.header-nav a,
+.header-now a{
+    font-size: 24px;
+    font-weight: 300;
+    display: inline-block;    
+    padding: 23px 5px;
+}
+.header-search{
+    margin-top: 25px;
+}
