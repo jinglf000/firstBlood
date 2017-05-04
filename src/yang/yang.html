@@ -9,11 +9,12 @@
     <title>个人中心</title>
     <link rel="icon" href="../assest/imgs/favicon.png">
     <!-- HTML5 shim  for IE8 support of HTML5 elements,from http://www.bootcdn.cn/   -->
+    <!-- ES5shiv es5 feature for IE8  -->
     <!--[if lt IE 9]>
         <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script>
-            alert('ie8')
-        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="../assest/css/base.css">
     <link rel="stylesheet" href="../assest/css/person.css">
@@ -70,51 +71,54 @@
                 <div class="show">
 
                 </div>
-                <div class="edit clearfix" >
+                <div class="edit clearfix" id="base-edit" >
+                <script type="text/html" id="t-base-edit">
                     <h3>基本信息</h3>
-                    <form action="">
-                        <div class="row1">
-                            <label for="name" class="form-label">姓名</label>
-                            <input type="text" class="form-control" data- name="name" id="name">
-                            <p class="msg-error">错误信息</p>
-                        </div>
-                        <div class="row2">
-                            <label for="cardnum" class="form-label">证件类型</label>
-                            <input type="text" class="form-control" data- name="cardnum" id="cardnum">
-                        </div>
-                        <div class="row1">
-                            <label for="sex"  class="form-label">性别</label>
-                            <p><button class="btn btn-hollow btn-first" type="button">男</button><button class="btn btn-hollow" type="button">女</button></p>
-                        </div>
-                        <div class="row2">
-                            <label for="address" class="form-label">现居住地址</label>
-                            <input type="text" class="form-control" data name="address" id="address">
-                        </div>
-                        <div class="row1">
-                            <label for="phone"  class="form-label">手机号</label>
-                            <input type="text" class="form-control" data name="phone" id="phone">
-                        </div>
-                        <div class="row2">
-                            <label for="email" class="form-label">邮箱</label>
-                            <input type="text" class="form-control" data name="email" id="email">
-                        </div>
-                        <div class="row1">
-                            <label for="social"  class="form-label">政治面貌</label>
-                            <input type="text" class="form-control" data name="social" id="social">
-                        </div>
-                        <div class="row2">
-                            <label for="marriage" class="form-label">婚姻状况</label>
-                            <input type="text" class="form-control" data name="marriage" id="marriage">
-                        </div>
-                        <div class="row1">
-                            <label for="huko" class="form-label">户籍</label>
-                            <input type="text" class="form-control" data name="huko" id="huko">
-                        </div>
-                        <div class="offset1 row2 edit-btns">
-                            <button class="btn btn-blue-lighter btn2" type="submit" onclick="return false">确定</button>
-                            <button class="btn btn1"  type="reset">取消</button>
-                        </div>
-                    </form>
+                        <form action="">
+                            <div class="row1">
+                                <label for="name" class="form-label">姓名</label>
+                                <input type="text" class="form-control" data- name="name" id="name" value="<%=name%>">
+                                <p class="msg-error">错误信息</p>
+                            </div>
+                            <div class="row2">
+                                <label for="cardnum" class="form-label">证件类型</label>
+                                <input type="text" class="form-control" data- name="cardnum" id="cardnum" value=" cardnum ">
+                            </div>
+                            <div class="row1">
+                                <input type="hidden" value=" sex ">
+                                <label for="sex"  class="form-label">性别</label>
+                                <p><button class="btn btn-hollow btn-first" type="button">男</button><button class="btn btn-hollow" type="button">女</button></p>
+                            </div>
+                            <div class="row2">
+                                <label for="address" class="form-label">现居住地址</label>
+                                <input type="text" class="form-control" data name="address" id="address" value=" address ">
+                            </div>
+                            <div class="row1">
+                                <label for="phone"  class="form-label">手机号</label>
+                                <input type="text" class="form-control" data name="phone" id="phone" value=" phone ">
+                            </div>
+                            <div class="row2">
+                                <label for="email" class="form-label">邮箱</label>
+                                <input type="text" class="form-control" data name="email" id="email" value=" email ">
+                            </div>
+                            <div class="row1">
+                                <label for="social"  class="form-label">政治面貌</label>
+                                <input type="text" class="form-control" data name="social" id="social" value=" social ">
+                            </div>
+                            <div class="row2">
+                                <label for="marriage" class="form-label">婚姻状况</label>
+                                <input type="text" class="form-control" data name="marriage" id="marriage" value=" marriage ">
+                            </div>
+                            <div class="row1">
+                                <label for="huko" class="form-label">户籍</label>
+                                <input type="text" class="form-control" data name="huko" id="huko" value=" huko ">
+                            </div>
+                            <div class="offset1 row2 edit-btns">
+                                <button class="btn btn-blue-lighter btn2" type="submit" onclick="return false">确定</button>
+                                <button class="btn btn1"  type="reset">取消</button>
+                            </div>
+                        </form>
+                </script>
                 </div>
             </div>
         </div>
@@ -209,7 +213,24 @@
     </footer>
 </div>
 <script src="../assest/jquery/jquery.min.js"></script>
-<script src="../assest/bootstrap/dist/js/bootstrap.js"></script>
-
+<script src="../assest/art-template/lib/template-web.js"></script>
+<script>
+    $(function(){
+        var render = template.compile('t-base-edit');
+        var r_base_data = {
+            name: '周霖',
+            cardnum: '41236xxxxxxxxx',
+            sex: '0',
+            address: '北京市海淀区',
+            phone: '155xxxxxxx',
+            email: 'zhoulin@qq.com',
+            social: '团员',
+            marriage: '0',
+            huko: '辽宁本溪'
+        }
+        console.log(template.render('t-base-edit',r_base_data))
+        document.getElementById("base-edit").innerHTML   = render.render(r_base_data);
+    });
+</script>
 </body>
 </html>

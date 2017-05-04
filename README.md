@@ -15,6 +15,14 @@ en，这是一血
 *   2、AMD 加载工具 require.js or esl.js（拉钩）？？
 *   3、jquery artTemplate 确定
 *   4、矢量图标库使用 iconfont
+
+## 技术文档
+*   1、artTemplate https://www.npmjs.com/package/art-template
+*   2、iconfont http://iconfont.cn/
+*   3、jquery  http://www.css88.com/
+
+
+
 ## 组件化分析（组件化开发提升代复用，高内聚低耦合；）
 ## gulp 工作流插件
 > gulp-load-plugins：自动加载 package.json 中的 gulp 插件\r

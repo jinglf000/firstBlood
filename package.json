@@ -37,5 +37,8 @@
     "stream-combiner2": "^1.1.1",
     "vue": "^2.3.0",
     "vuex": "^2.3.1"
+  },
+  "dependencies": {
+    "art-template": "^4.8.1"
   }
 }
