@@ -1,0 +1,189 @@
+/**
+ * 个人中心style
+ *@author jinglf000
+*/
+/* main */
+.main{
+    margin-top: 30px;
+}
+.main .main-left,
+.main .main-right{
+    float: left;
+}
+.main .main-left{
+    width: 800px;
+    height: 300px;
+}
+.main .main-right{
+    width: 360px;
+    margin-left: 40px;
+}
+/* 左侧栏 简历内容 */
+.main .main-left{
+    padding: 20px 40px;
+}
+.edit-bar span{
+    padding-right: 20px;
+}
+.main-left .edit{
+    background-color: #f3fafd;
+    margin: 10px -40px;
+    padding: 0 40px;
+}
+.offset1{
+    margin-left: 50%;
+}
+.offset2{
+    margin-right: 50%;
+}
+.row1,
+.row2{
+    float: left;
+    height: 90px;
+}
+.row1 .form-label,
+.row2 .form-label{
+    display: inline-block;
+    line-height: 1;
+    padding-bottom: 10px;
+}
+.row1{
+    width: 50%;
+    padding-right: 20px;
+}
+.row2{
+    width: 50%;
+    padding-left: 20px;
+}
+.base .edit .btn-hollow{
+    width: calc(50% - 5px);
+    width: 165px;
+}
+.base .edit .btn-hollow.btn-first{
+    margin-right: 10px;
+}
+.edit-btns .btn{
+    float: right;
+}
+.edit-btns .btn2{
+    margin-left: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 右侧栏  简历状态*/
+.state{
+    padding: 30px 20px 20px 20px;
+    margin-bottom: 30px;
+}
+.state .state-list > li{
+    float: left;
+    text-align: center;
+    position: relative;
+    padding: 0 19px;
+}
+.state .state-list .iconfont{
+    font-size: 24px;
+}
+.state-list .state-num{
+    position: absolute;
+    text-align: center;
+    background-color: red;
+    color:#fff;
+    line-height: 1;
+    font-size: 12px;
+    padding: 4px;
+    padding-left: 6px;
+    top: 0;
+    right: 0px;
+    min-width: 20px;
+    border-radius: 16px;
+    transform: scale(.9);
+}
+/* 简历列表 */
+.my-resume{
+    padding: 20px 40px;
+    margin-bottom: 4px;
+}
+.my-resume h3{
+    line-height: 1;
+    padding-bottom: 20px;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    font-weight: normal;
+    color: #333;
+}
+.my-resume .resume-list{
+    margin: 10px 0;
+}
+.my-resume .resume-list > li {
+    cursor: pointer;
+    float: left;
+    width: 50%;
+    padding: 10px 10px 10px 0 ;
+    vertical-align: middle;
+}
+.resume-list .icon-delete{
+    display: none;
+    float: right;
+    margin-right: 0px;
+    transition: all ease .5s;
+}
+.resume-list > li:hover .icon-delete{
+    display: block;
+}
+.resume-list li > a{
+    display: inline-block;
+    /*padding: 3px 0;*/
+    /*padding-top: 4px;*/
+    width: 86%;
+    line-height: 1.5;
+}
+.my-resume .add-resume{
+    width: 100%;
+}
+/* 简历各项 */
+.resume-fix{
+    padding: 20px 40px;
+}
+.resume-fix .fix-num {
+    padding-right: 40px;
+}
+.fix-process{
+    margin: 20px 0 ;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #f1f1f1;
+}
+.process-bar{
+    height: 6px;
+    width: 63%;
+    border-radius: 3px;
+    background-color: #337ab7;
+}
+.resume-fix .add-r-video{
+    width: 100%;
+}
+.fix-item{
+    color: #888;
+    margin: 20px 0;
+}
+.fix-item li{
+    padding: 15px 0 ;
+    cursor: pointer;
+}
+.fix-item li .iconfont{
+    padding-right: 20px;
+}
+.fix-item li a{
+    color: #888;
+}

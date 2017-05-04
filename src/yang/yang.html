@@ -11,55 +11,202 @@
     <!-- HTML5 shim  for IE8 support of HTML5 elements,from http://www.bootcdn.cn/   -->
     <!--[if lt IE 9]>
         <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script>
+            alert('ie8')
+        </script>
     <![endif]-->
-    <link rel="stylesheet" href="../assest/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assest/css/base.css">
+    <link rel="stylesheet" href="../assest/css/person.css">
 </head>
-<body>
+<body class="body-f2">
 <div>
+    <!-- 网站顶端菜单 -->
     <div class="site-topbar">
         <div class="container">
-            <div class="row">
-                <div class="topbar-nav">
-                    <a href="##"><i class="iconfont ">&#xe608;</i>贵阳人力资源网</a>
-                    <span class="sep"></span>
-                    <a href="##"><i class="iconfont ">&#xe633;</i>进入企业版</a>
-                </div>
-                <div class="topbar-info">
-                    <span class="hidden">
-                        <a href="##">登录</a>
-                        <span>|</span>
-                        <a href="##">注册</a>
-                    </span>
-                    <a href="javascript:void(0)"><i class="iconfont ">&#xe602;</i>张磊<i class="iconfont icon-arrow-down"></i></a>
-                    <a href="javascript:void(0);"><i class="iconfont ">&#xe601;</i>手机贵阳</a>
-                </div>
+            <div class="topbar-nav">
+                <a href="##"><i class="iconfont ">&#xe608;</i>贵阳人力资源网</a>
+                <span class="sep"></span>
+                <a href="##"><i class="iconfont ">&#xe633;</i>进入企业版</a>
+            </div>
+            <div class="topbar-info">
+                <span class="hidden">
+                    <a href="##">登录</a>
+                    <span>|</span>
+                    <a href="##">注册</a>
+                </span>
+                <a href="javascript:void(0)"><i class="iconfont ">&#xe602;</i>张磊<i class="iconfont icon-arrow-down"></i></a>
+                <a href="javascript:void(0);"><i class="iconfont ">&#xe601;</i>手机贵阳</a>
             </div>
         </div>
     </div>
+    <!-- 一级导航栏 -->
     <header class="site-header">
         <div class="container">
-            <div class="row">
-                <div class="header-now col-md-1">
-                    <a href="javascript:void(0);">个人中心</a>
+            <div class="header-now ">
+                <a href="javascript:void(0);">个人中心</a>
+            </div>
+            <div class="header-nav ">
+                <a href="##">我的简历</a>
+                <a href="##">考试报名</a>
+                <a href="##">账号管理</a>
+                <a href="##">就业见习登记</a>
+            </div>
+            <div class="header-search  row">
+                <input type="text" class="form-control form-inline" placeholder="产品经理">
+                <button type="submit" class="btn btn-blue-lighter">搜索</button>
+            </div>
+        </div>
+    </header>
+    <!-- 个人简历主体 -->
+    <main class="container main">
+        <!-- 个人简历容器 -->
+        <div class="main-left bg-fff">
+            <div class="edit-bar">
+                <span class="auto-delivery">自动投递<i class="iconfont icon-switch-close"></i></span>
+                <span class="auto-public">公开/保密<i class="iconfont icon-switch-open"></i></span>
+                <span class="refresh">更新时间：<span class="refesh-time">2017-03-29 08:30</span><i class="iconfont icon-refresh cur-p"></i></span>
+            </div>
+            <div id="base" class="r-item base">
+                <div class="show">
+
                 </div>
-                <div class="header-nav col-md-7">
-                    <a href="##">我的简历</a>
-                    <a href="##">考试报名</a>
-                    <a href="##">账号管理</a>
-                    <a href="##">就业见习登记</a>
-                </div>
-                <div class="header-search col-sm-2">
-                    <form action="" class="form-inline">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="产品经理">
+                <div class="edit clearfix" >
+                    <h3>基本信息</h3>
+                    <form action="">
+                        <div class="row1">
+                            <label for="name" class="form-label">姓名</label>
+                            <input type="text" class="form-control" data- name="name" id="name">
+                            <p class="msg-error">错误信息</p>
                         </div>
-                        <button type="submit" class="btn btn-blue-lighter">搜索</button>
+                        <div class="row2">
+                            <label for="cardnum" class="form-label">证件类型</label>
+                            <input type="text" class="form-control" data- name="cardnum" id="cardnum">
+                        </div>
+                        <div class="row1">
+                            <label for="sex"  class="form-label">性别</label>
+                            <p><button class="btn btn-hollow btn-first" type="button">男</button><button class="btn btn-hollow" type="button">女</button></p>
+                        </div>
+                        <div class="row2">
+                            <label for="address" class="form-label">现居住地址</label>
+                            <input type="text" class="form-control" data name="address" id="address">
+                        </div>
+                        <div class="row1">
+                            <label for="phone"  class="form-label">手机号</label>
+                            <input type="text" class="form-control" data name="phone" id="phone">
+                        </div>
+                        <div class="row2">
+                            <label for="email" class="form-label">邮箱</label>
+                            <input type="text" class="form-control" data name="email" id="email">
+                        </div>
+                        <div class="row1">
+                            <label for="social"  class="form-label">政治面貌</label>
+                            <input type="text" class="form-control" data name="social" id="social">
+                        </div>
+                        <div class="row2">
+                            <label for="marriage" class="form-label">婚姻状况</label>
+                            <input type="text" class="form-control" data name="marriage" id="marriage">
+                        </div>
+                        <div class="row1">
+                            <label for="huko" class="form-label">户籍</label>
+                            <input type="text" class="form-control" data name="huko" id="huko">
+                        </div>
+                        <div class="offset1 row2 edit-btns">
+                            <button class="btn btn-blue-lighter btn2" type="submit" onclick="return false">确定</button>
+                            <button class="btn btn1"  type="reset">取消</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-    </header>
+        <!-- 状态容器 -->
+        <div class="main-right">
+            <div class="state bg-fff">
+                <ul class="state-list clearfix">
+                    <li class="">
+                        <a href="###">
+                            <span class="state-num">22222</span>
+                            <i class="iconfont">&#xe61b;</i>
+                            <p>投递箱</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="###">
+                            <span class="state-num">231</span>
+                            <i class="iconfont">&#xe691;</i>
+                            <p>关注盒</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="###">
+                            <span class="state-num">23</span>
+                            <i class="iconfont">&#xe646;</i>
+                            <p>收藏夹</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="###">
+                            <span class="state-num hidden">0</span>
+                            <i class="iconfont">&#xe626;</i>
+                            <p>订阅栏</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="my-resume bg-fff">
+                <h3>我的简历</h3>
+                <ul class="resume-list clearfix">
+                    <li>
+                        <a href="" class="">web开发工程师事实上事实上</a>
+                        <i class="iconfont icon-delete"></i>
+                    </li>
+                    <li>
+                        <a href="" class="">交互设计师</a>
+                        <i class="iconfont icon-delete"></i>
+                    </li>
+                    <li>
+                        <a href="" class="text-ell">交互设计师</a>
+                        <i class="iconfont icon-delete"></i>
+                    </li>
+                </ul>
+                <button class="btn add-resume">添加简历</button>
+            </div>
+            <div class="resume-fix bg-fff">
+                <div class="resume-per">
+                    <p class="fix-bar">
+                        <span>简历完整度：</span>
+                        <span class="col-blue fix-num">72%</span>
+                        <a href="##">预览简历</a>
+                        <a href="##">下载简历</a>
+                    </p>
+                </div>
+                <div class="fix-process">
+                    <p class="process-bar"></p>
+                </div>
+                <div class="resume-vedio">
+                    <input type="file" class="hidden" id="add-video">
+                    <label class="btn add-r-video" for="add-video">添加视频简历</label>
+                </div>
+                <div class="fix-item">
+                    <ul>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#base">基本信息</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#hope">求职意向</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#edu">教育经历</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#work">工作经历</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#item">项目经验</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#card">个人证书</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#lang">语言能力</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#skill">技能评价</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#self">自我描述</a></li>
+                        <li><i class="iconfont ">&#xe602;</i><a href="#produ">作品展示</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- 页脚 -->
+    <footer>
+
+    </footer>
 </div>
 <script src="../assest/jquery/jquery.min.js"></script>
 <script src="../assest/bootstrap/dist/js/bootstrap.js"></script>
