@@ -23,7 +23,7 @@
     padding: 20px 40px;
 }
 .edit-bar span{
-    padding-right: 20px;
+    padding-right: 10px;
 }
 .main-left .edit{
     background-color: #f3fafd;
@@ -68,9 +68,40 @@
 .edit-btns .btn2{
     margin-left: 25px;
 }
-
-
-
+/* base 基本信息 */
+.s-base-left,
+.s-base-right{
+    float: left;
+}
+.s-base-right{
+    width: 200px;
+}
+.s-base-right img{
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 100px;
+}
+.s-base-left{
+    width: 500px;
+    margin-right: 20px;
+}
+.s-base-left .s-edit-btn{
+    float: right;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.s-base-left .s-edit-btn .iconfont{
+    position: relative;
+    top: -1px;
+}
+.s-base-left .base-msg{
+    padding: 15px 0;
+}
+.s-base-left  span{
+    padding-right: 10px;
+}
 
 
 

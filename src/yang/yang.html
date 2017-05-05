@@ -63,58 +63,90 @@
         <!-- 个人简历容器 -->
         <div class="main-left bg-fff">
             <div class="edit-bar">
-                <span class="auto-delivery">自动投递<i class="iconfont icon-switch-close"></i></span>
-                <span class="auto-public">公开/保密<i class="iconfont icon-switch-open"></i></span>
-                <span class="refresh">更新时间：<span class="refesh-time">2017-03-29 08:30</span><i class="iconfont icon-refresh cur-p"></i></span>
+                <span class="auto-delivery"><span>自动投递</span><i class="iconfont icon-switch-close"></i></span>
+                <span class="auto-public"><span>公开/保密</span><i class="iconfont icon-switch-open"></i></span>
+                <span class="refresh"><span>更新时间：</span><span class="refesh-time">2017-03-29 08:30</span><i class="iconfont icon-refresh cur-p"></i></span>
             </div>
             <div id="base" class="r-item base">
-                <div class="show">
-
+                <div class="show clearfix" id="base-show">
+                    <script type="text/html" id="t-base-show">
+                        <div class="s-base-left ">
+                            <div class="s-edit-btn"><i class="iconfont icon-editbar"></i><span>编辑</span></div>
+                            <h3><span >{{_name}}</span><i {{if +sex}} class="iconfont icon-man" {{else}} class="iconfont icon-woman" {{/if}}></i></h3>
+                            <p class="base-msg">
+                                <i class="iconfont icon-head"></i>
+                                <span>{{age}}岁</span>
+                                <span>{{address}}</span>
+                                <span>{{marriage}}</span>
+                                <span>{{social}}</span>
+                                <i class="iconfont icon-card"></i>
+                                <sapn>{{cardType}}</sapn>
+                                <span>{{cardnum}}</span>
+                            </p>
+                            <p class="base-msg">
+                                <i class="iconfont icon-phone"></i>
+                                <span>{{phone}}</span>
+                                <i class="iconfont icon-email"></i>
+                                <span>{{email}}</span>
+                            </p>
+                        </div>
+                        <div class="s-base-right">
+                            <img src="../assest/imgs/favicon.png" alt="">
+                        </div>
+                    </script>
                 </div>
                 <div class="edit clearfix" id="base-edit" >
                 <script type="text/html" id="t-base-edit">
                     <h3>基本信息</h3>
-                        <form action="">
+                        <form action="" novalidate="novalidate">
                             <div class="row1">
                                 <label for="name" class="form-label">姓名</label>
-                                <input type="text" class="form-control" data- name="name" id="name" value="<%=name%>">
-                                <p class="msg-error">错误信息</p>
+                                <input type="text" class="form-control" data- name="name" id="name" value=" {{_name}}" required maxlang='10' >
                             </div>
                             <div class="row2">
                                 <label for="cardnum" class="form-label">证件类型</label>
-                                <input type="text" class="form-control" data- name="cardnum" id="cardnum" value=" cardnum ">
+                                <input type="text" class="form-control" data- name="cardnum" id="cardnum" value=" {{cardnum}} ">
                             </div>
                             <div class="row1">
-                                <input type="hidden" value=" sex ">
+                                <input type="hidden" value=" {{sex}} ">
                                 <label for="sex"  class="form-label">性别</label>
                                 <p><button class="btn btn-hollow btn-first" type="button">男</button><button class="btn btn-hollow" type="button">女</button></p>
                             </div>
                             <div class="row2">
                                 <label for="address" class="form-label">现居住地址</label>
-                                <input type="text" class="form-control" data name="address" id="address" value=" address ">
+                                <input type="text" class="form-control" data name="address" id="address" value=" {{address}} ">
                             </div>
                             <div class="row1">
                                 <label for="phone"  class="form-label">手机号</label>
-                                <input type="text" class="form-control" data name="phone" id="phone" value=" phone ">
+                                <input type="text" class="form-control" data name="phone" id="phone" value=" {{phone}} ">
                             </div>
                             <div class="row2">
                                 <label for="email" class="form-label">邮箱</label>
-                                <input type="text" class="form-control" data name="email" id="email" value=" email ">
+                                <input type="text" class="form-control" data name="email" id="email" value=" {{email}} ">
                             </div>
                             <div class="row1">
                                 <label for="social"  class="form-label">政治面貌</label>
-                                <input type="text" class="form-control" data name="social" id="social" value=" social ">
+                                <input type="text" class="form-control" data name="social" id="social" value=" {{social}} ">
                             </div>
                             <div class="row2">
                                 <label for="marriage" class="form-label">婚姻状况</label>
-                                <input type="text" class="form-control" data name="marriage" id="marriage" value=" marriage ">
+                                <input type="hidden" value="" >
+                                <button class="btn select-btn" value='' id="b-marriage">{{marriage}}</button>
+                                <!--<input type="text" class="form-control" name="marriage" id="marriage" value=" {{marriage}} ">-->
+                                <div class="select-con">
+                                    <ul>
+                                        <li value='0'>已婚</li>
+                                        <li value='1'>未婚</li>
+                                        <li value='2'>离婚</li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="row1">
                                 <label for="huko" class="form-label">户籍</label>
-                                <input type="text" class="form-control" data name="huko" id="huko" value=" huko ">
+                                <input type="text" class="form-control" data name="huko" id="huko" value=" {{huko}} ">
                             </div>
                             <div class="offset1 row2 edit-btns">
-                                <button class="btn btn-blue-lighter btn2" type="submit" onclick="return false">确定</button>
+                                <button class="btn btn-blue-lighter btn2" type="submit" >确定</button>
                                 <button class="btn btn1"  type="reset">取消</button>
                             </div>
                         </form>
@@ -209,16 +241,23 @@
     </main>
     <!-- 页脚 -->
     <footer>
-
+        <input type="hidden" name="token" value="token的值">
     </footer>
 </div>
-<script src="../assest/jquery/jquery.min.js"></script>
+<script src="../assest/jquery/jquery.js"></script>
 <script src="../assest/art-template/lib/template-web.js"></script>
+<script src="../assest/jquery-validation/dist/jquery.validate.js"></script>
+<script></script>
+<script src="../assest/js/base.js"></script>
 <script>
+    template.defaults.debug = true;
     $(function(){
-        var render = template.compile('t-base-edit');
+        var render
+        // 把模板转换成渲染函数；
+        var render_edit = template.compile($("#t-base-edit").html());
+        var render_show = template.compile($("#t-base-show").html());
         var r_base_data = {
-            name: '周霖',
+            _name: '周霖',
             cardnum: '41236xxxxxxxxx',
             sex: '0',
             address: '北京市海淀区',
@@ -228,8 +267,24 @@
             marriage: '0',
             huko: '辽宁本溪'
         }
-        console.log(template.render('t-base-edit',r_base_data))
-        document.getElementById("base-edit").innerHTML   = render.render(r_base_data);
+        // 使用数据渲染模板
+        $("#base-edit").html(render_edit(r_base_data));
+        $("#base-show").html(render_show(r_base_data));
+        $("#base-edit form").validate({
+            submitHandler: function(form){
+                console.log(form);
+            }
+        });
+        $("#base-edit").on("click","#b-marriage",function(e){
+
+        });
+
+        
+
+        $("body").on("click.select","button.select-btn",function(){
+
+        });
+
     });
 </script>
 </body>

@@ -1,0 +1,11 @@
+<!-- 模板文件地址 -->
+
+<script type="text/html" id="for-select">
+    <div class="select-con">
+        <ul>
+            {{each list}}
+            <li data-value="{{$value.id}}">{{$value.name}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</script>

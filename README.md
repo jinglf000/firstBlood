@@ -17,9 +17,10 @@ en，这是一血
 *   4、矢量图标库使用 iconfont
 
 ## 技术文档
-*   1、artTemplate https://www.npmjs.com/package/art-template
+*   1、artTemplate https://github.com/aui/art-template
 *   2、iconfont http://iconfont.cn/
 *   3、jquery  http://www.css88.com/
+*   4、jquery-validation http://www.runoob.com/jquery/jquery-plugin-validate.html
 
 
 
