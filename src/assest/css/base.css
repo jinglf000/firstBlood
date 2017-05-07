@@ -375,6 +375,8 @@ ul,li{
     background-color: #fff;
     color: #888;
 }
+
+button[ui-select],
 .select-btn{
     width: 100%;
     background-color: #fff;
@@ -382,6 +384,7 @@ ul,li{
     text-align: left;
     padding-left: 12px;
 }
+button[ui-select]:after,
 .select-btn:after{
     content: '\e94c';
     font-family: 'iconfont';
@@ -391,7 +394,7 @@ ul,li{
     top: 2px;
     color: #888;
 }
-.select-con{
+.ui-select-con{
     display: none;
     width: 100%;
     max-height: 150px;
@@ -402,14 +405,14 @@ ul,li{
     background-color: #fff;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, .1);
 }
-.select-con li{
+.ui-select-con li{
     cursor: pointer;
     transition: all ease .15s;
     padding: 6px 12px;
 }
 
-.select-con li.choiced,
-.select-con li:hover{
+.ui-select-con li.choiced,
+.ui-select-con li:hover{
     background-color: #4a9dfd;
     color: #fff;
 }

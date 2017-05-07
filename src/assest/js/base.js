@@ -38,6 +38,28 @@
     });
 }));
 (function($){
+    var ui_list = [],
+        ui_render,
+        ui_str_select;
+    
+    ui_str_select = '<div class="ui-select-con">'+
+        '<ul>'+
+            '{{each list}}'+
+            '<li data-value="{{$value.id}}">{{$value.name}}</li>'+
+            '{{/each}}'+
+        '</ul>'+
+    '</div>';
+
+    ui_list.push({
+        type: 'ui-select',
+        str : ui_str_select
+    });
+
+    ui_list.forEach(function(value,index){
+        var uiRender = {};
+        uiRender[value.type] = template.compile(value.str);
+        $('body').data('uiRender',uiRender);
+    });    
     
 
 

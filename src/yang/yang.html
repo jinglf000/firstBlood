@@ -126,14 +126,14 @@
                             </div>
                             <div class="row1">
                                 <label for="social"  class="form-label">政治面貌</label>
-                                <input type="text" class="form-control" data name="social" id="social" value=" {{social}} ">
+                                <button class="btn"  id="social" ui-select='social' type="button" ui-name='id,name'>{{social}}</button>
                             </div>
                             <div class="row2">
                                 <label for="marriage" class="form-label">婚姻状况</label>
-                                <input type="hidden" value="" >
-                                <button class="btn select-btn" value='' id="b-marriage">{{marriage}}</button>
+                                <input type="hidden" value="" name="marriage">
+                                <button class="btn select-btn"  id="marriage" ui-select='marriage' type='button'>{{marriage}}</button>
                                 <!--<input type="text" class="form-control" name="marriage" id="marriage" value=" {{marriage}} ">-->
-                                <div class="select-con">
+                                <div class="ui-select-con">
                                     <ul>
                                         <li value='0'>已婚</li>
                                         <li value='1'>未婚</li>
@@ -247,45 +247,103 @@
 <script src="../assest/jquery/jquery.js"></script>
 <script src="../assest/art-template/lib/template-web.js"></script>
 <script src="../assest/jquery-validation/dist/jquery.validate.js"></script>
-<script></script>
+<script>
+    (function($){
+        $('body').data({
+            ajaxData : {
+                r_base_data: {
+                    _name: '周霖',
+                    cardnum: '41236xxxxxxxxx',
+                    sex: '0',
+                    address: '北京市海淀区',
+                    phone: '155xxxxxxx',
+                    email: 'zhoulin@qq.com',
+                    social: '团员',
+                    marriage: '0',
+                    huko: '辽宁本溪'
+                },
+                ui_code_mar: [
+                    {id:'0',name:'未婚'},
+                    {id:'1',name:'已婚'},
+                    {id:'2',name:'离婚'}
+                ],
+                ui_code_social: [
+                    {id:'0',name:'团员'},
+                    {id:'1',name:'党员'},
+                    {id:'2',name:'无党派人士'},
+                    {id:'3',name:'国民党'}
+                ]
+            }
+        });
+    })($)
+</script>
 <script src="../assest/js/base.js"></script>
 <script>
     template.defaults.debug = true;
     $(function(){
-        var render
+        var ajaxData = $("body").data('ajaxData');
+        var render;
         // 把模板转换成渲染函数；
         var render_edit = template.compile($("#t-base-edit").html());
         var render_show = template.compile($("#t-base-show").html());
-        var r_base_data = {
-            _name: '周霖',
-            cardnum: '41236xxxxxxxxx',
-            sex: '0',
-            address: '北京市海淀区',
-            phone: '155xxxxxxx',
-            email: 'zhoulin@qq.com',
-            social: '团员',
-            marriage: '0',
-            huko: '辽宁本溪'
-        }
+        
         // 使用数据渲染模板
-        $("#base-edit").html(render_edit(r_base_data));
-        $("#base-show").html(render_show(r_base_data));
+        $("#base-edit").html(render_edit(ajaxData.r_base_data));
+        $("#base-show").html(render_show(ajaxData.r_base_data));
         $("#base-edit form").validate({
             submitHandler: function(form){
                 console.log(form);
             }
         });
-        $("#base-edit").on("click","#b-marriage",function(e){
+
+        $("body").on("click.ui","button[ui-select]",function(e){
+            var _this   = $(this),
+                _parent = _this.parents('.row1,.row2'),
+                _ui_select = _parent.find('ui-select-con');
 
         });
+        /**
+         *  @param $ele Ui触发元素 button
+         *  
+        */
+         
+        function Ui($ele){
+            var _parent     = $ele.parents('.row1,.row2'),
+                _ui_select  = _parent.find('.ui-select-con'),
+                _nameList   = $ele.attr('ui-name').split(','),
+                _ui_inputs ;
+
+
+            this.state = 0;
+            
+            if(_ui_select.length > 0){
+                this.$ele = _ui_select;
+            }else{
+                
+            }
+
+
+        }
+        // 获取值
+        Ui.prototype.get = function(){
+
+        }
+
+        // 设置值
+        Ui.prototype.set = function(){
+
+
+        }
+
+        // 状态改变
+        Ui.prototype.change = function(){
+            
+        }
 
         
 
-        $("body").on("click.select","button.select-btn",function(){
-
-        });
-
     });
+
 </script>
 </body>
 </html>
