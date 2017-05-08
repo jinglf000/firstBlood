@@ -45,13 +45,13 @@
     ui_str_select = '<div class="ui-select-con">'+
         '<ul>'+
             '{{each list}}'+
-            '<li data-value="{{$value.id}}">{{$value.name}}</li>'+
+            '<li data-id="{{$value.id}}" data-name="{{$value.name}}" data-param={{$value.param}}>{{$value.name}}</li>'+
             '{{/each}}'+
         '</ul>'+
     '</div>';
 
     ui_list.push({
-        type: 'ui-select',
+        type: 'ui_select',
         str : ui_str_select
     });
 

@@ -121,17 +121,21 @@
                                 <input type="text" class="form-control" data name="phone" id="phone" value=" {{phone}} ">
                             </div>
                             <div class="row2">
-                                <label for="email" class="form-label">邮箱</label>
+                            <label for="email" class="form-label">邮箱</label>
                                 <input type="text" class="form-control" data name="email" id="email" value=" {{email}} ">
                             </div>
                             <div class="row1">
                                 <label for="social"  class="form-label">政治面貌</label>
-                                <button class="btn"  id="social" ui-select='social' type="button" ui-name='id,name'>{{social}}</button>
+                                <input type="hidden" name='id_social' value="{{social_id}}">
+                                <input type="hidden" name='name_social' value="{{social_name}}">
+                                <button class="btn"  id="social" ui-select='social' type="button" ui-name='id_social,name_social'>{{social}}</button>
                             </div>
                             <div class="row2">
                                 <label for="marriage" class="form-label">婚姻状况</label>
-                                <input type="hidden" value="" name="marriage">
-                                <button class="btn select-btn"  id="marriage" ui-select='marriage' type='button'>{{marriage}}</button>
+                                <input type="hidden" name="id_mar" value="{{mar_id}}">
+                                <input type="hidden" name="name_mar" value="{{mar_name}}">
+                                <!-- ui-select 对应的是code ui-name 对应的是赋予的input type=hidden -->
+                                <button class="btn select-btn"  id="marriage" ui-select='marriage' ui-name='id_mar,name_mar,param_mar' type='button' ming_tian='123'>{{marriage}}</button>
                                 <!--<input type="text" class="form-control" name="marriage" id="marriage" value=" {{marriage}} ">-->
                                 <div class="ui-select-con">
                                     <ul>
@@ -243,6 +247,7 @@
     <footer>
         <input type="hidden" name="token" value="token的值">
     </footer>
+    <p data-id="1230" data-name="天明" data-param="false" id="p" >data</p>
 </div>
 <script src="../assest/jquery/jquery.js"></script>
 <script src="../assest/art-template/lib/template-web.js"></script>
@@ -250,7 +255,7 @@
 <script>
     (function($){
         $('body').data({
-            ajaxData : {
+            ajax_data : {
                 r_base_data: {
                     _name: '周霖',
                     cardnum: '41236xxxxxxxxx',
@@ -262,7 +267,7 @@
                     marriage: '0',
                     huko: '辽宁本溪'
                 },
-                ui_code_mar: [
+                ui_code_marriage: [
                     {id:'0',name:'未婚'},
                     {id:'1',name:'已婚'},
                     {id:'2',name:'离婚'}
@@ -281,9 +286,25 @@
 <script>
     template.defaults.debug = true;
     $(function(){
-        var ajaxData = $("body").data('ajaxData');
+        var ajaxData = $("body").data('ajax_data');
         var render;
         // 把模板转换成渲染函数；
+        function resume(){
+            
+        }
+
+
+
+
+        $('body').data('resume',{
+            base : {
+                renderShow : template.compile($("#t-base-edit").html()),
+                renderEdit : template.compile($("#t-base-show").html()),
+                data : {}
+            }
+        })
+
+
         var render_edit = template.compile($("#t-base-edit").html());
         var render_show = template.compile($("#t-base-show").html());
         
@@ -295,51 +316,8 @@
                 console.log(form);
             }
         });
-
-        $("body").on("click.ui","button[ui-select]",function(e){
-            var _this   = $(this),
-                _parent = _this.parents('.row1,.row2'),
-                _ui_select = _parent.find('ui-select-con');
-
-        });
-        /**
-         *  @param $ele Ui触发元素 button
-         *  
-        */
-         
-        function Ui($ele){
-            var _parent     = $ele.parents('.row1,.row2'),
-                _ui_select  = _parent.find('.ui-select-con'),
-                _nameList   = $ele.attr('ui-name').split(','),
-                _ui_inputs ;
-
-
-            this.state = 0;
-            
-            if(_ui_select.length > 0){
-                this.$ele = _ui_select;
-            }else{
-                
-            }
-
-
-        }
-        // 获取值
-        Ui.prototype.get = function(){
-
-        }
-
-        // 设置值
-        Ui.prototype.set = function(){
-
-
-        }
-
-        // 状态改变
-        Ui.prototype.change = function(){
-            
-        }
-
+        
+        
         
 
     });
