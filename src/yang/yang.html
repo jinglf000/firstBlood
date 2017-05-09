@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-    <meta name="renderer" content="webkit">
+    <meta name="renderer" content="webkit ie-stand">
     <meta name="keywords" content="贵阳人力资源网,招聘,求职,找工作,人才网">
     <meta name="description" content="贵阳人力资源网是贵阳地区最大的招聘网站,提供最真实的招聘信息">
     <title>个人中心</title>
@@ -71,7 +71,7 @@
                 <div class="show clearfix" id="base-show">
                     <script type="text/html" id="t-base-show">
                         <div class="s-base-left ">
-                            <div class="s-edit-btn"><i class="iconfont icon-editbar"></i><span>编辑</span></div>
+                            <div class="s-edit-btn" id="s-edit-btn"><i class="iconfont icon-editbar"></i><span>编辑</span></div>
                             <h3><span >{{_name}}</span><i {{if +sex}} class="iconfont icon-man" {{else}} class="iconfont icon-woman" {{/if}}></i></h3>
                             <p class="base-msg">
                                 <i class="iconfont icon-head"></i>
@@ -150,8 +150,8 @@
                                 <input type="text" class="form-control" data name="huko" id="huko" value=" {{huko}} ">
                             </div>
                             <div class="offset1 row2 edit-btns">
-                                <button class="btn btn-blue-lighter btn2" type="submit" >确定</button>
-                                <button class="btn btn1"  type="reset">取消</button>
+                                <button class="btn btn-blue-lighter btn2 edit-submit" type="submit" >确定</button>
+                                <button class="btn btn1 edit-reset"  type="reset">取消</button>
                             </div>
                         </form>
                 </script>
@@ -289,36 +289,139 @@
         var ajaxData = $("body").data('ajax_data');
         var render;
         // 把模板转换成渲染函数；
-        function resume(){
+        function Resume(obj){
+            var $body = $('body'),
+                _this = this,
+                _resume = $body.data('resume'),
+                _container = $(obj.containerId),
+                _showContainer = $(obj.showContainer),
+                _editContainer = $(obj.editContainer),
+                _render = {
+                     renderShow : obj.renderShow,
+                     renderEdit : obj.renderEdit
+                }
+                _dataStatus = 1;
+
+            // data cache
+            // if(!_resume){
+            //     $body.data('resume',{});
+            //     _resume = $body.data('resume');
+            // }
+            // _resume[obj.type] = _render;
             
-        }
+            // 数据变动 重新渲染 show
+            _container.on("renderShowData",function(e,num){
+                _showContainer.html(_render.renderShow(_this.data[+num]));
+            });
+            // 编辑内容 Edit 
+            _container.on("renderEditData",function(e,num){
+                _editContainer.html(_render.renderEdit(_this.data[+num]));
+                _container.trigger('editRenderSuccess');
+            });
+            // UI改变 显示内容
+            _container.on("show",function(){
+                _showContainer.show();
+                _editContainer.hide();
+            });
+            _container.on('edit',function(){
+                _showContainer.hide();
+                _editContainer.show();
+            })
+            // 事件绑定 show 层编辑按钮
+            _container.on("click.ui",obj.showBtn,function(){
+                var _num = 0;
+                if(typeof obj.showBtnFn === 'function'){
+                    _num = obj.showBtnFn.call(this,_container);
+                }
+                if(_dataStatus){
+                    _container.trigger('renderEditData',_num);
+                }
+                _container.trigger('edit');
+            });
+            // edit 层 取消按钮
+            _container.on("click.ui",obj.editReset,function(){
+                if(typeof obj.editResetFn === "function"){
+                    obj.editResetFn.call(this);
+                }
+                _dataStatus = 0;
+                _container.trigger('show');
+            });
+            // edit 编辑提交成功 
+            _container.on("ajaxSuccess",function(num){
+                _container.tirgger('renderShowData',num || 0);
+                _container.trigger('show');
+            });
 
 
-
-
-        $('body').data('resume',{
-            base : {
-                renderShow : template.compile($("#t-base-edit").html()),
-                renderEdit : template.compile($("#t-base-show").html()),
-                data : {}
+            // edit 层 提交按钮
+            // _container.on("click.ui",obj.editSubmit,function(){
+            //     if(typeof obj.editSubmitFn === "function"){
+            //         obj.editSubmitFn.call(this,_container);
+            //     }
+            // });
+            this.container = _container;
+            this.dataChange = function(val){
+                _dataStatus = val;
             }
-        })
+        }
+        // Resume.prototype.editSubmitFn = function(){
+
+        // }
+        // Resume 简历模块
+        var base = new Resume({
+            type : base,
+            containerId : '#base',
+            renderShow : template.compile($("#t-base-show").html()),
+            renderEdit : template.compile($("#t-base-edit").html()),
+            showContainer : '#base-show',
+            editContainer : '#base-edit',
+            showBtn : '#s-edit-btn',
+            showBtnFn : function(){
+                console.log('----- #base 即将执行编辑操作----- ');
+            },
+            editReset : "#base-edit .edit-reset",
+            editResetFn : function(){
+                console.log('------- 执行重置取消操作 -------');
+            },
+            editSubmit : "#base-edit .edit-submit"
+            // editSubmitFn : m
+        });
+        // edit 渲染成功
+        base.container.on('editRenderSuccess',function(e){
+            $("#base-edit form").validate({
+                submitHandler: function(form){
+
+                }
+            });
+        });
+
 
 
         var render_edit = template.compile($("#t-base-edit").html());
         var render_show = template.compile($("#t-base-show").html());
         
-        // 使用数据渲染模板
-        $("#base-edit").html(render_edit(ajaxData.r_base_data));
-        $("#base-show").html(render_show(ajaxData.r_base_data));
         $("#base-edit form").validate({
             submitHandler: function(form){
                 console.log(form);
             }
         });
+        // 使用数据渲染模板
+        $("#base-edit").html(render_edit(ajaxData.r_base_data));
+        $("#base-show").html(render_show(ajaxData.r_base_data));
         
-        
-        
+        /**
+         * @param $form jquery form元素
+         *
+         */
+        function formData($from){
+            var obj = {};
+            $form.find('input:enabled').each(function(index,item){
+                
+            });
+
+
+            return obj;
+        }
 
     });
 
