@@ -3,12 +3,13 @@
         "msg" : "no"
     },
     "data" : {
-        "_name": "周霖",
+        "_name": "周芷若",
+        "age" : 24455,
         "cardnum" : "41236xxxxxxxxx",
         "sex" : "0",
         "address" : "北京市海淀区",
         "phone" : "155xxxxxxx",
-        "email" : "zhoulin@qq.com",
+        "email" : "zhouzhiruo@qq.com",
         "social" : "团员",
         "marriage" : "0",
         "huko" : "辽宁本溪"

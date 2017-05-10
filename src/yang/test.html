@@ -15,13 +15,79 @@
 		<input type="radio" name="ming" value="1">
 		<input type="radio" name="ming" value="2">
 		<input type="radio" name="ming" value="3">
+		<select name="select" id="">
+			<option value="0">男女</option>
+			<option value="1">女男</option>
+		</select>
+		<textarea name="mark" id="" cols="30" rows="10"></textarea>
+		<button type="button" id="submit">点击</button>
 	</form>
 	<script src="../assest/jquery/jquery.js"></script>
 	<script>
-		$form = $("#form");
-		$form.find('input:enabled').each(function(index,item){
-			
+		console.clear();
+
+		$("#btn").click(function(e){
+			var $form = $("#form"),
+				postData = getFormData($form);
+			console.log(postData);
 		});
+		var getFormData = getForm(getValue);
+
+		/**
+		 * @argument getFn 对DOM元素处理的funtion
+		 * @return function 获取form表单里面的数据的方法--@return obj
+		 */
+		function getForm(getFn){
+			return function($form){
+				var obj = {};
+				$form.find('input,textarea,select').each(function(index,ele){
+					var val = getFn(ele);
+					val.forEach(function(_obj,i){
+						var _key = _obj.name,
+							_val = _obj.value,
+							_;
+						if(obj[_key]){
+							if(!(obj[_key] instanceof Array)){
+								_ = obj[_key];
+								obj[_key] = [_];
+							}
+							obj[_key].push(_val);
+						}else{
+							obj[_key] = _val;
+						}
+					})
+				});
+				return obj;
+			}
+		};
+		
+		/** 获取form表单元素的核心判断
+		 * @arguments ele，DOM元素
+		 * @return arr[{name:'key',value:'val'}]
+		 * 当返回的key是重复的时候，会把相同的key处理成数组存放
+		 **/
+		function getValue(ele){
+			var _nodeName = ele.nodeName.toLowerCase(),
+				_inputType = ele.type,
+				_flag,
+				_flag2,
+				arr = [],
+				obj = {};
+			_flag = _nodeName === "select" || _nodeName === "textarea"  || ( _nodeName === 'input' && _inputType !== "checkbox" && _inputType !== "radio");
+			_flag2 = _nodeName === 'input' && (_inputType === "checkbox" ||  _inputType === "radio");
+			if(_flag){
+				obj.name = ele.name;
+				obj.value = ele.value;
+				arr.push(obj);
+			}else if( _flag2 ){
+				if(ele.checked){
+					obj.name = ele.name;
+					obj.value = ele.value;
+					arr.push(obj);
+				}
+			}
+			return arr;
+		}
 	</script>
 </body>
 </html>

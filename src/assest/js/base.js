@@ -38,10 +38,12 @@
     });
 }));
 (function($){
+
+    // 通用UI组件代码
     var ui_list = [],
         ui_render,
         ui_str_select;
-    
+    // select 组件
     ui_str_select = '<div class="ui-select-con">'+
         '<ul>'+
             '{{each list}}'+
@@ -61,8 +63,70 @@
         $('body').data('uiRender',uiRender);
     });    
     
-
-
+    /** 获取表单值，实际调用方法
+     * @argument 处理方式
+     * @return function 获取form表单里面的数据的方法--
+     * @argument $form form的jquery对象；@return obj
+     */
+    function getForm(getMethod){
+        return function($form){
+            var obj = {};
+            $form.find('input,textarea,select').each(function(index,ele){
+                var val = getValueMethod[getMethod](ele);
+                val.forEach(function(_obj,i){
+                    var _key = _obj.name,
+                        _val = _obj.value,
+                        _;
+                    if(obj[_key]){
+                        if(!(obj[_key] instanceof Array)){
+                            _ = obj[_key];
+                            obj[_key] = [_];
+                        }
+                        obj[_key].push(_val);
+                    }else{
+                        obj[_key] = _val;
+                    }
+                })
+            });
+            return obj;
+        }
+    };
+    
+    /** 获取表单元素值的不同方法
+     * @argument ele，DOM元素
+     * @return arr[{name:'key',value:'val'}]
+     * 当返回的key是重复的时候，会把相同的key处理成数组存放
+     **/
+    var getValueMethod = {
+        fromName : function(ele){
+            var _nodeName = ele.nodeName.toLowerCase(),
+                _inputType = ele.type,
+                _str = "checkbox,radio,button,reset,submit",
+                _flag,
+                _flag2,
+                arr = [],
+                obj = {};
+            _flag = _nodeName === "select" || _nodeName === "textarea"  || ( _nodeName === 'input' && (_str.indexOf(_inputType) === -1))
+            _flag2 = _nodeName === 'input' && (_inputType === "checkbox" ||  _inputType === "radio");
+            if(_flag){
+                if( _inputType === "hidden"){
+                    if(ele.name === ""){
+                        return arr;
+                    }
+                }
+                obj.name = ele.name;
+                obj.value = ele.value;
+                arr.push(obj);
+            }else if( _flag2 ){
+                if(ele.checked){
+                    obj.name = ele.name;
+                    obj.value = ele.value;
+                    arr.push(obj);
+                }
+            }
+            return arr;
+        }
+    }
 
     // 为jquery扩展方法extend 
     $.extend({
@@ -238,7 +302,8 @@
                 return card;
             };
             return checkCard(card);
-        }
+        },
+        "getFormData" : getForm('fromName')
     })
     // 为jquery添加自定义验证规则
     if($.validator){
