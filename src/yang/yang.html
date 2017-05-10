@@ -68,12 +68,13 @@
                 <span class="refresh"><span>更新时间：</span><span class="refesh-time">2017-03-29 08:30</span><i class="iconfont icon-refresh cur-p"></i></span>
             </div>
             <div id="base" class="r-item base">
-                    <button class="btn" id='add'>新增</button>
+                <button class="btn" id='add'>新增</button>
                 <div class="show-list">
-                    <div class="show clearfix" id="base-show">
-                        <script type="text/html" id="t-base-show">
+                    <script type="text/html" id="t-base-show">
+                        <div class="show clearfix">
                             <div class="s-base-left ">
-                                <div class="s-edit-btn" id="s-edit-btn"><i class="iconfont icon-editbar"></i><span>编辑</span></div>
+                                <button class="btn btn-delete">删除</button>
+                                <div class="s-edit-btn" id="s-edit-btn" num="{{num}}"><i class="iconfont icon-editbar"></i><span>编辑</span></div>
                                 <h3><span >{{_name}}</span><i {{if +sex}} class="iconfont icon-man" {{else}} class="iconfont icon-woman" {{/if}}></i></h3>
                                 <p class="base-msg">
                                     <i class="iconfont icon-head"></i>
@@ -95,8 +96,8 @@
                             <div class="s-base-right">
                                 <img src="../assest/imgs/favicon.png" alt="">
                             </div>
-                        </script>
-                    </div>
+                        </div>
+                    </script>
                 </div>
                 <div class="edit clearfix" id="base-edit" >
                     <script type="text/html" id="t-base-edit">
@@ -104,7 +105,7 @@
                             <form action="" novalidate="novalidate">
                                 <div class="row1">
                                     <label for="name" class="form-label">姓名</label>
-                                    <input type="text" class="form-control" data- name="name" id="name" value=" {{_name}}" required maxlang='10' >
+                                    <input type="text" class="form-control" name="_name" id="_name" value=" {{_name}}" required maxlang='10' >
                                 </div>
                                 <div class="row2">
                                     <label for="cardnum" class="form-label">证件类型</label>

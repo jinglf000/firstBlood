@@ -3,99 +3,122 @@
  * @description 用于处理简历各项
  * 
  */
-template.defaults.debug = true;
 $(function(){
-    // 把模板转换成渲染函数；
+
+    /**
+     * @argument obj 配置对象
+     * 
+     */
     function Resume(obj){
-        var _this = this,
-            _con = $(obj.conId),
-            _showCon = $(obj.showCon),
-            _editCon = $(obj.editCon),
-            _render = {
-                    renderShow : obj.renderShow,
-                    renderEdit : obj.renderEdit
+        var isNew ,_this = this,
+            con = obj.con,
+            r = {},last,_data = [];
+             
+        $.extend(this,obj);
+        this.data = _data;
+        this.getEditNum = getEditNum;
+        // add btn
+        con.on('click.ui',getS('add'),function(e){
+            var len = _this.data.length;
+            if(len < _this.max){
+                _this.renderE('add');
+                _this.turn(1);
+                isNew = 'add';
             }
-            _dataStatus = 1;
-        
-        // 数据变动 重新渲染 show
-        _con.on("renderShowData",function(e,num){
-            _showCon.html(_render.renderShow(_this.data[+num]));
         });
-        // 编辑内容 Edit 
-        _con.on("renderEditData",function(e,num){
-            _editCon.html(_render.renderEdit(_this.data[+num]));
-            _con.trigger('editRenderSuccess');
+        // edit btn
+        con.on('click.ui',getS('edit'),function(e){
+            var index = _this.getIndex(this);
+            _this.renderE(index);
+            _this.turn(1);
+            isNew = index;
         });
-        // UI改变 显示内容
-        _con.on("show",function(){
-            _showCon.show();
-            _editCon.hide();
+        // cancale btn 
+        con.on('click.ui',getS('cancle'),function(e){
+            _this.turn();
         });
-        _con.on('edit',function(){
-            _showCon.hide();
-            _editCon.show();
-        })
-        // 事件绑定 show 层编辑按钮
-        _con.on("click.ui",obj.showBtn,function(){
-            var _num = 0;
-            if(typeof obj.showBtnFn === 'function'){
-                _num = obj.showBtnFn.call(this,_con);
+        // delete btn
+        con.on("delete.ui",function(e,ele){
+            var index = _this.getIndex(ele);
+            _this.data.splice(index,1);
+            $(ele).parents(_this.getS('show')).remove();
+        });
+        // submit btn 
+        con.on("submit.ui",function(e,data){
+            if( isNew === 'add'){
+                _this.data.push(data);
+                _this.renderS(1)
+            }else{
+                _this.data[isNew] = data;
+                _this.renderS(2,isNew);
             }
-            _num = typeof _num === 'number' ? _num : 0;
-
-            if(_dataStatus){
-                _con.trigger('renderEditData',_num);
-            }
-            _con.trigger('edit',_num);
+            _this.turn()
         });
-        // edit 层 取消按钮
-        _con.on("click.ui",obj.editCancle,function(){
-            if(typeof obj.editCancleFn === "function"){
-                obj.editCancleFn.call(this);
-            }
-            _dataStatus = 0;
-            _con.trigger('show');
-        });
-        // edit 编辑提交成功 
-        _con.on("ajaxSuccess",function(e,num){
-            _con.trigger('renderShowData',num || 0);
-            _con.trigger('show');
-        });
-
-        this.con = _con;
-        this.dataChange = function(val){
-            _dataStatus = val;
+        function getS(str){
+            return obj.arrSelector[obj.arrName.indexOf(str)];
+        }
+        function getEditNum(){
+            return isNew;
         }
     }
-    Resume.prototype.ajaxReady = function(num){
-        this.con.trigger('ajaxSuccess',num);
+    Resume.prototype.submit = function(data){
+        this.con.trigger('submit',data);
     }
-    Resume.prototype.postReady = function(num){
-        this.con.trigger('ajaxSuccess',num)
-        this.dataChange(1);
-        this.con.trigger('renderShowData');
+    Resume.prototype.delete = function(ele){
+        this.con.trigger('delete',ele);
+    };
+    Resume.prototype.getIndex = function(ele){
+        var x = $(ele).parents(this.getS('show')).siblings().length;
+        return x - ($(ele).parents(this.getS('show')).index());
     }
-    // Resume 简历模块
-    var base = new Resume({
-        conId : '#base',
-        renderShow : template.compile($("#t-base-show").html()),
-        renderEdit : template.compile($("#t-base-edit").html()),
-        showCon : '#base-show',
-        editCon : '#base-edit',
-        showBtn : '#s-edit-btn',
-        showBtnFn : function(){
-            console.log('----- 点击编辑按钮 ---> 即将执行编辑操作----- ');
-            // return 0;
-        },
-        editCancle : "#base-edit .edit-cancle",
-        editCancleFn : function(){
-            console.log('------- 点击取消按钮 ---> 执行取消操作 -------');
-        },
-        editSubmit : "#base-edit .edit-submit"
-    });
+    // str --> selector
+    Resume.prototype.getS = function(str){
+        return this.arrSelector[this.arrName.indexOf(str)];
+    };
+    // 默认展示部分显示
+    Resume.prototype.turn = function(flag){
+        var arr = [$(this.getS('showArea'),this.con),$(this.getS('editArea'),this.con)],
+            action = ['show','hide'];
+        if(flag){
+            action = action.reverse();
+        }
+        arr.forEach(function($ele,index){
+            $ele[action[index]]();
+        });
+    }
+    // render 展示层渲染,0，首次渲染，1，新增，2，编辑,num 对应的项
+    Resume.prototype.renderS = function(flag,num){
+        var showArea = $(this.getS('showArea'),this.con),
+            _this = this;
+        if(!flag){
+            _this.data.forEach(function(item,index){
+                showArea.prepend(_this.renderShow(item));
+            });
+        }else if (flag == 1){
+            showArea.prepend(_this.renderShow(_this.data[_this.data.length - 1]));
+        }else{
+            showArea.find('.show:eq('+ num +')').replaceWith(_this.renderShow(_this.data[num]));
+        }
+    }
+    // render 编辑层渲染 
+    Resume.prototype.renderE = function(num){
+        var editArea = $(this.getS('editArea'),this.con);
+        editArea.html(this.renderEdit(num === 'add' ? {} : this.data[num]));
+        this.con.trigger('editSucc');
+    }
 
-    // edit 渲染成功
-    base.con.on('editRenderSuccess',function(e){
+    var base = new Resume({
+        max : 5,
+        con : $("#base"),
+        // 新增 编辑 取消 保存 删除 展示区域 编辑区域 展示单元
+        arrName     : ['add','edit','cancle','submit','delete','showArea','editArea','show'],
+        arrSelector : ['#add','#s-edit-btn','.edit-cancle','#delete','.edit-submit','.show-list','#base-edit','.show'],
+        renderShow  : template.compile($("#t-base-show").html()),
+        renderEdit  : template.compile($("#t-base-edit").html())
+    });
+    $("#t-base-show,#t-base-edit").remove();
+    // 编辑框渲染成功
+    base.con.on("editSucc",function(e){
         $("#base-edit form").validate({
             submitHandler: function(form,e){
                 if(e.preventDefault){
@@ -109,61 +132,29 @@ $(function(){
                     method : 'get',
                     data : ajaxData
                 }).done(function(result){
-                    console.log(result);
-                    base.ajaxReady();
-                    base.data = result.data;
+                    base.submit(ajaxData);
                 });
             }
         });
     });
 
+    // 获取值
     $.get('/assest/server/data.json').done(function(result){
         console.log(result);
-        base.data = [result.data];
-        base.ajaxReady();
-    }).fail(function(err){
-
-    })
-
-    
-    
-});
-
-$(function(){
-
-    /**
-     * @argument obj 配置对象
-     * 
-     */
-    function Resume(obj){
-        var now,max = obj.max,
-            con = obj.context,r = {},last,data = [];
-        
-
-
-
-
-
-        // add btn
-        con.on('click.ui',getS('add'),function(e){
-            
-        });
-
-
-        function getS(str){
-            return arrSelector[arrName.indexOf(str)];
-        }
-    }
-    Resume.prototype
-
-    var base = new Resume({
-        max : 5,
-        context : $("#base"),
-        arrSelector : ['#add','#s-edit-btn','.edit-cancle','.edit-submit','.show-list'],
-        arrName     : ['add','edit','cancle','submit','showList'],
-        renderShow  : template.compile($("#t-base-show").html()),
-        renderEdit  : template.compile($("#t-base-edit").html())
+        base.data = result.data;
+        // 异步成功 渲染内容
+        base.renderS();
     });
+    $("#base").on("click",".btn-delete",function(e){
+        var _this = this;
+        $.ajax({
+            url : '/assest/server/success.json',
+            method : 'get'
+        }).done(function(result){
+            base.delete(_this);
+        });
+    });
+
     // 弃用
     function no(){
         
