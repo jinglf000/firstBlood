@@ -6,17 +6,30 @@
 $(function(){
 
     /**
-     * @argument obj 配置对象
-     * 
+     * 简历各项内容操作
+     * @param   {Object}   obj 配置对象
+     * @param   {Number}   obj.max  最大条数
+     * @param   {JQuery}   obj.con  简历单元最外围jQuery对象
+     * @param   {Array}    obj.arrName ['add','edit','cancle','submit','delete','showArea','editArea','show']
+     *                     新增 编辑 取消 保存 删除 展示区域 编辑区域 展示单元
+     * @param   {Array}    obj.arrSelector 对应的jQuery选择器
+     * @param   {Render}   obj.renderShow   展示层渲染函数
+     * @param   {Render}   obj.renderEdit   编辑层渲染函数
+     * @return  {Resume} 简历对象
      */
+    // Resume 创建对象的时候，完成事件绑定，通用的方法放到原型上，删除，提交成功的异步操作使用事件进行通知
+
     function Resume(obj){
         var isNew ,_this = this,
             con = obj.con,
-            r = {},last,_data = [];
+            r = {},_data = [];
              
         $.extend(this,obj);
         this.data = _data;
         this.getEditNum = getEditNum;
+        // 默认条数为5个
+        this.max = this.max ? this.max : 5;
+
         // add btn
         con.on('click.ui',getS('add'),function(e){
             var len = _this.data.length;
@@ -37,6 +50,8 @@ $(function(){
         con.on('click.ui',getS('cancle'),function(e){
             _this.turn();
         });
+        // 
+        
         // delete btn
         con.on("delete.ui",function(e,ele){
             var index = _this.getIndex(ele);
@@ -60,13 +75,17 @@ $(function(){
         function getEditNum(){
             return isNew;
         }
+        getS = null;
     }
-    Resume.prototype.submit = function(data){
+    // 编辑成功 提交
+    Resume.prototype.sub = function(data){
         this.con.trigger('submit',data);
     }
-    Resume.prototype.delete = function(ele){
+    // 删除成功 提交
+    Resume.prototype.del = function(ele){
         this.con.trigger('delete',ele);
     };
+    // 获取 展示列序号
     Resume.prototype.getIndex = function(ele){
         var x = $(ele).parents(this.getS('show')).siblings().length;
         return x - ($(ele).parents(this.getS('show')).index());
@@ -107,16 +126,16 @@ $(function(){
         this.con.trigger('editSucc');
     }
 
+    
     var base = new Resume({
         max : 5,
         con : $("#base"),
-        // 新增 编辑 取消 保存 删除 展示区域 编辑区域 展示单元
         arrName     : ['add','edit','cancle','submit','delete','showArea','editArea','show'],
         arrSelector : ['#add','#s-edit-btn','.edit-cancle','#delete','.edit-submit','.show-list','#base-edit','.show'],
-        renderShow  : template.compile($("#t-base-show").html()),
-        renderEdit  : template.compile($("#t-base-edit").html())
+        renderShow  : $.getRenderFn("#t-base-show"),
+        renderEdit  : $.getRenderFn("#t-base-edit")
     });
-    $("#t-base-show,#t-base-edit").remove();
+    
     // 编辑框渲染成功
     base.con.on("editSucc",function(e){
         $("#base-edit form").validate({
@@ -132,36 +151,26 @@ $(function(){
                     method : 'get',
                     data : ajaxData
                 }).done(function(result){
-                    base.submit(ajaxData);
+                    base.sub(ajaxData);
                 });
             }
         });
     });
-
     // 获取值
     $.get('/assest/server/data.json').done(function(result){
-        console.log(result);
         base.data = result.data;
         // 异步成功 渲染内容
         base.renderS();
     });
+    // 删除
     $("#base").on("click",".btn-delete",function(e){
         var _this = this;
         $.ajax({
             url : '/assest/server/success.json',
             method : 'get'
         }).done(function(result){
-            base.delete(_this);
+            base.del(_this);
         });
     });
-
-    // 弃用
-    function no(){
-        
-        arrSelector.forEach(function(item,index){
-            r[arrName[index]] = $(item,con);
-        });
-    }
-
 
 });

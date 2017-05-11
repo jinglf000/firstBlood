@@ -217,3 +217,17 @@
 .fix-item li a{
     color: #888;
 }
+.resume-video {
+    position: relative;
+    height: 40px;
+    width: 100%;
+}
+.resume-video .file-up{
+    height: 1px;
+}
+.resume-video .add-r-video{
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+}

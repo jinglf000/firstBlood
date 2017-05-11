@@ -62,7 +62,7 @@
         uiRender[value.type] = template.compile(value.str);
         $('body').data('uiRender',uiRender);
     });    
-    
+    /**********     获取表单        ***********/
     /** 获取表单值，实际调用方法
      * @argument 处理方式
      * @return function 获取form表单里面的数据的方法--
@@ -126,6 +126,17 @@
             }
             return arr;
         }
+    };
+    /**
+     * 获取渲染函数
+     * @param {slector} selector jquery 选择器
+     * @returns {Function}  renderFn 渲染函数
+     */
+    function getRenderFn(selector){
+        var $ele = $(selector),
+            str = $ele.html();
+        $ele.remove();
+        return template.compile(str);
     }
 
     // 为jquery扩展方法extend 
@@ -303,7 +314,8 @@
             };
             return checkCard(card);
         },
-        "getFormData" : getForm('fromName')
+        "getFormData" : getForm('fromName'),
+        "getRenderFn" : getRenderFn
     })
     // 为jquery添加自定义验证规则
     if($.validator){
