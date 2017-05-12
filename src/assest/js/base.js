@@ -40,22 +40,30 @@
 (function($){
 
     // 通用UI组件代码
-    var ui_list = [],
+    var ui_list,
         ui_render,
-        ui_str_select;
+        ui_str = [];
     // select 组件
-    ui_str_select = '<div class="ui-select-con">'+
-        '<ul>'+
-            '{{each list}}'+
-            '<li data-id="{{$value.id}}" data-name="{{$value.name}}" data-param={{$value.param}}>{{$value.name}}</li>'+
-            '{{/each}}'+
-        '</ul>'+
-    '</div>';
+    ui_list = [
+        {
+            type : 'uiSelect',
+            str  : '<div class="ui-select-con">'+
+                    '<ul>'+
+                        '{{each list}}'+
+                        '<li data-id="{{$value.id}}" data-name="{{$value.name}}" data-param={{$value.param}}>{{$value.name}}</li>'+
+                        '{{/each}}'+
+                    '</ul>'+
+                '</div>'
+        },
+        {
+            type : 'uiMsgSuccess',
+            str  : '<div class="msgSuccess">'+
+                        '<i class="iconfont icon-msg-success"></i>'+
+                        '<p class="content">{{msg}}</p>'+
+                    '</div>'
+        }
+    ];
 
-    ui_list.push({
-        type: 'ui_select',
-        str : ui_str_select
-    });
 
     ui_list.forEach(function(value,index){
         var uiRender = {};
@@ -315,7 +323,17 @@
             return checkCard(card);
         },
         "getFormData" : getForm('fromName'),
-        "getRenderFn" : getRenderFn
+        "getRenderFn" : getRenderFn,
+        "msgSuccess"  : function(data,time){
+            time = time === undefined ? 500 : time;
+            var body = $('body'),
+                $ele = $(body.data('uiRender').uiMsgSuccess({msg:data})).appendTo(body);
+            setTimeout(function(){
+                $ele.fadeOut(function(){
+                    $ele.remove();
+                })
+            },time)
+        }
     })
     // 为jquery添加自定义验证规则
     if($.validator){

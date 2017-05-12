@@ -105,11 +105,11 @@
                             <form action="" novalidate="novalidate">
                                 <div class="row1">
                                     <label for="name" class="form-label">姓名</label>
-                                    <input type="text" class="form-control" name="_name" id="_name" value=" {{_name}}" required maxlang='10' >
+                                    <input type="text" class="form-control" name="_name" id="_name" value="{{_name}}" required maxlang='10' >
                                 </div>
                                 <div class="row2">
                                     <label for="cardnum" class="form-label">证件类型</label>
-                                    <input type="text" class="form-control" data- name="cardnum" id="cardnum" value=" {{cardnum}} ">
+                                    <input type="text" class="form-control" data- name="cardnum" id="cardnum" value="{{cardnum}}">
                                 </div>
                                 <div class="row1">
                                     <input type="hidden" value=" {{sex}} " name='sex'>
@@ -118,15 +118,15 @@
                                 </div>
                                 <div class="row2">
                                     <label for="address" class="form-label">现居住地址</label>
-                                    <input type="text" class="form-control"  name="address" id="address" value=" {{address}} ">
+                                    <input type="text" class="form-control"  name="address" id="address" value="{{address}}">
                                 </div>
                                 <div class="row1">
                                     <label for="phone"  class="form-label">手机号</label>
-                                    <input type="text" class="form-control"  name="phone" id="phone" value=" {{phone}} ">
+                                    <input type="text" class="form-control"  name="phone" id="phone" value="{{phone}}">
                                 </div>
                                 <div class="row2">
                                 <label for="email" class="form-label">邮箱</label>
-                                    <input type="text" class="form-control"  name="email" id="email" value=" {{email}} ">
+                                    <input type="text" class="form-control"  name="email" id="email" value="{{email}}">
                                 </div>
                                 <div class="row1">
                                     <label for="social"  class="form-label">政治面貌</label>
@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="row1">
                                     <label for="huko" class="form-label">户籍</label>
-                                    <input type="text" class="form-control"  name="huko" id="huko" value=" {{huko}} ">
+                                    <input type="text" class="form-control"  name="huko" id="huko" value="{{huko}}">
                                 </div>
                                 <div class="offset1 row2 edit-btns">
                                     <button class="btn btn-blue-lighter btn2 edit-submit" type="submit">确认</button>
@@ -239,15 +239,19 @@
             </div>
         </div>
     </main>
+    
     <!-- 页脚 -->
     <footer>
     </footer>
+    <!--<div class="msgSuccess">
+        <i class="iconfont icon-msg-success"></i>
+        <p class="content">{{msg}}</p>
+    </div>-->
 </div>
 <script src="../assest/jquery/jquery.min.js"></script>
 <script src="../assest/art-template/lib/template-web.js"></script>
 <script src="../assest/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="../assest/js/base.js"></script>
 <script src="../assest/js/resume.js"></script>
-<script src="../assest/art-template/lib/render.js"></script>
 </body>
 </html>

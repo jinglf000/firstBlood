@@ -21,24 +21,24 @@ $(function(){
 
     function Resume(obj){
         var isNew ,_this = this,
-            con = obj.con,
-            r = {},_data = [];
-             
+            con = obj.con ,delIndex;
         $.extend(this,obj);
-        this.data = _data;
+        this.data = [];
         this.getEditNum = getEditNum;
         // 默认条数为5个
         this.max = this.max ? this.max : 5;
 
         // add btn
-        con.on('click.ui',getS('add'),function(e){
-            var len = _this.data.length;
-            if(len < _this.max){
-                _this.renderE('add');
-                _this.turn(1);
-                isNew = 'add';
-            }
-        });
+        if(getS('add')){
+            con.on('click.ui',getS('add'),function(e){
+                var len = _this.data.length;
+                if(len < _this.max){
+                    _this.renderE('add');
+                    _this.turn(1);
+                    isNew = 'add';
+                }
+            });
+        }
         // edit btn
         con.on('click.ui',getS('edit'),function(e){
             var index = _this.getIndex(this);
@@ -50,14 +50,18 @@ $(function(){
         con.on('click.ui',getS('cancle'),function(e){
             _this.turn();
         });
-        // 
-        
-        // delete btn
-        con.on("delete.ui",function(e,ele){
-            var index = _this.getIndex(ele);
-            _this.data.splice(index,1);
-            $(ele).parents(_this.getS('show')).remove();
-        });
+        if(getS('delete')){
+            con.on('click.ui',getS('delete'),function(e){
+                delIndex = _this.getIndex(this);
+            })
+            // delete btn
+            con.on("delete.ui",function(e){
+                var index = delIndex;
+                _this.data.splice(index,1),
+                    showList = $(_this.getS('showArea') + ' ' +_this.getS('show'));
+                showList.eq(showList.length - (1 + delIndex)).remove();
+            });
+        }
         // submit btn 
         con.on("submit.ui",function(e,data){
             if( isNew === 'add'){
@@ -82,8 +86,8 @@ $(function(){
         this.con.trigger('submit',data);
     }
     // 删除成功 提交
-    Resume.prototype.del = function(ele){
-        this.con.trigger('delete',ele);
+    Resume.prototype.del = function(){
+        this.con.trigger('delete');
     };
     // 获取 展示列序号
     Resume.prototype.getIndex = function(ele){
@@ -125,17 +129,16 @@ $(function(){
         editArea.html(this.renderEdit(num === 'add' ? {} : this.data[num]));
         this.con.trigger('editSucc');
     }
-
+    
     
     var base = new Resume({
         max : 5,
         con : $("#base"),
         arrName     : ['add','edit','cancle','submit','delete','showArea','editArea','show'],
-        arrSelector : ['#add','#s-edit-btn','.edit-cancle','#delete','.edit-submit','.show-list','#base-edit','.show'],
+        arrSelector : ['#add','.s-edit-btn','.edit-cancle','.edit-submit','.btn-delete','.show-list','#base-edit','.show'],
         renderShow  : $.getRenderFn("#t-base-show"),
         renderEdit  : $.getRenderFn("#t-base-edit")
     });
-    
     // 编辑框渲染成功
     base.con.on("editSucc",function(e){
         $("#base-edit form").validate({
@@ -152,6 +155,7 @@ $(function(){
                     data : ajaxData
                 }).done(function(result){
                     base.sub(ajaxData);
+                    $.msgSuccess("提交成功");
                 });
             }
         });
@@ -169,8 +173,9 @@ $(function(){
             url : '/assest/server/success.json',
             method : 'get'
         }).done(function(result){
-            base.del(_this);
+            base.del();
         });
     });
-
+    test = base;
 });
+var test ;
