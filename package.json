@@ -42,6 +42,8 @@
     "jquery": "^1.9.1",
     "less": "^2.7.2",
     "normalize.css": "^3.0.3",
+    "r.js": "^1.0.3",
+    "require.js": "^1.0.0",
     "st": "^1.2.0",
     "stream-combiner2": "^1.1.1",
     "vue": "^2.3.0",
