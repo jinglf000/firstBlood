@@ -30,6 +30,8 @@
                             <li><a href="./state/state.html">有限状态机</a></li>
                         </ul>
                     </nav>
+                    <input type="text" id="api" class="form-control" placeholder="api">
+                    <button id="apiBtn" >API</button>
                 </div>
                 <div class="col-md-12">
                     <div>
@@ -190,6 +192,24 @@
             }
             tab.initial();
             tab.switchFn(1);
+        });
+    </script>
+    <script>        
+        $(function(){
+            var apiSrc = $("#api");
+            $("#apiBtn").click(function(e){
+                $.ajax({
+                    url : '/api/#zh-CN/en/' + apiSrc.val(),
+                    type : 'get',
+                    success : function(result){
+                        console.log(result);
+                    },
+                    error : function(err){
+                        console.log('err');
+                        console.log(err);
+                    }
+                })
+            });
         });
     </script>
 </body>
