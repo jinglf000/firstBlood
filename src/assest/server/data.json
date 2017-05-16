@@ -4,7 +4,6 @@
     },
     "data" : [
         {   
-            "num" : 0,
             "_name": "周霖",
             "age" : 23,
             "cardnum" : "41236xxxxxxxxx",
@@ -17,7 +16,6 @@
             "huko" : "辽宁本溪"
         },
         {
-            "num" : 1,
             "_name": "周二珂",
             "age" : 23,
             "cardnum" : "41236xxxxxxxxx",
@@ -30,7 +28,6 @@
             "huko" : "上海"
         },
         {
-            "num" : 3,
             "_name": "王晓",
             "age" : 23,
             "cardnum" : "41236xxxxxxxxx",

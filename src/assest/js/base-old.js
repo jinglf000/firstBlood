@@ -1,15 +1,22 @@
 /**
- * @author  jinglf000
- * @description 项目公用文件，使用AMD文件加载方式，文件名就是该模块名
- * 
+ * 公用方法库
+ * @author jinglf000
+ * ###### Fri May 5 10:53:27 CST 2017
  */
-define(['jquery','validate','artTemplate'],function($,$validate,template){
-    // 路径配置
-    var base = {
-        PATH : "././"
-    }
 
-    // validate 中文提示
+// jquery-validation 中文提示信息
+(function( factory ) {
+    if ( typeof define === "function" && define.amd ) {
+        define( ["jquery", "../jquery.validate"], factory );
+    } else {
+        factory( jQuery );
+    }
+}(function( $ ) {
+    if(!$.validator){return};
+    /*
+    * Translated default messages for the jQuery validation plugin.
+    * Locale: ZH (Chinese, 中文 (Zhōngwén), 汉语, 漢語)
+    */
     $.extend($.validator.messages, {
         required: "这是必填字段",
         remote: "请修正此字段",
@@ -29,6 +36,9 @@ define(['jquery','validate','artTemplate'],function($,$validate,template){
         max: $.validator.format("请输入不大于 {0} 的数值"),
         min: $.validator.format("请输入不小于 {0} 的数值")
     });
+}));
+(function($){
+
     // 通用UI组件代码
     var ui_list,
         ui_render,
@@ -53,6 +63,8 @@ define(['jquery','validate','artTemplate'],function($,$validate,template){
                     '</div>'
         }
     ];
+
+
     ui_list.forEach(function(value,index){
         var uiRender = {};
         uiRender[value.type] = template.compile(value.str);
@@ -329,7 +341,8 @@ define(['jquery','validate','artTemplate'],function($,$validate,template){
         $.validator.setDefaults({
             errorClass: 'infoerror',
             errorElement: 'em'
-        });
+        })
+
         // 自定义验证规则  
         $.validator.addMethod('idCard',function(value,element){//身份证号码 严格验证
             return this.optional(element) || ($.checkIdCard.call(element,element));
@@ -350,7 +363,6 @@ define(['jquery','validate','artTemplate'],function($,$validate,template){
                 length = value.length + (china_str ? china_str.length : 0 );
             return this.optional(element) || !(length >+params);
         },$.validator.format('请输入小于 {0} 长度的字符，中文算两个'));
-    };
+    }
+})($);
 
-    return base;
-});

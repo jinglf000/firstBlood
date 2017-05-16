@@ -30,8 +30,13 @@
                             <li><a href="./state/state.html">有限状态机</a></li>
                         </ul>
                     </nav>
+<<<<<<< HEAD
                     <input type="text"  class="form-control" id="path">
                     <input type="button" id="btn">
+=======
+                    <input type="text" id="api" class="form-control" placeholder="api">
+                    <button id="apiBtn" >API</button>
+>>>>>>> 0f7f2228f7add0222db6a16ee968b7b23acde4c2
                 </div>
                 <div class="col-md-12">
                     <div>
@@ -196,14 +201,20 @@
             tab.switchFn(1);
         });
     </script>
-    <script>    
+
+    <script>        
         $(function(){
-            $("#btn").click(function(e){
+            var apiSrc = $("#api");
+            $("#apiBtn").click(function(e){
                 $.ajax({
-                    url : $("#path").val(),
-                    type : 'POST',
+                    url : '/api/#zh-CN/en/' + apiSrc.val(),
+                    type : 'get',
                     success : function(result){
                         console.log(result);
+                    },
+                    error : function(err){
+                        console.log('err');
+                        console.log(err);
                     }
                 })
             });

@@ -7,8 +7,33 @@ const gulp = require('gulp'),
     http        = require('http'),
     st          = require('st'),
     browserSync = require('browser-sync'),
-    reload      = browserSync.reload;
-    
+    reload      = browserSync.reload,
+    // httpProxy   = require('http-proxy'),
+    proxy       = require('http-proxy-middleware'),
+    modRewrite  = require('connect-modrewrite');
+    // proxy = httpProxy.createProxyServer({
+    //     target : 'http://www.baidu.com',
+    //     // target : {
+    //     //     host : '',
+    //     //     port : ''
+    //     // }
+    // });
+
+
+    // proxy.on('error',function(err ,req ,res){
+    //     console.log(err);
+    //     res.writeHead(500, {
+    //         'Content-Type' : 'text/plain'
+    //     });
+    //     res.end("代理服务出错啦~~~~~");
+    // })
+
+    var apiProxy = proxy('/api',    {
+        target: 'https://translate.google.com.hk/',
+        changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
+        logLevel: 'debug'
+    })
+
 // less 编译：
 gulp.task('less',function(){
     gulp
@@ -40,14 +65,29 @@ gulp.task('dev_old',function(){
 gulp.task('dev',function(){
     browserSync({
         server: {
-            baseDir: 'src'
+            baseDir: 'src',
+            // middleware : function(req , res ,next ){
+            //     // console.log(req);
+            //     // if(req.originalUrl.indexOf('/apisss/')){
+            //     //     proxy.web(req,res);
+            //     // }
+            //     // next();
+                
+            // }
+            // middleware: [
+            //     modRewrite([
+            //         '^/test/proxy/(.*)$ https://translate.google.com.hk/$1 [P]'
+            //     ])
+            // ]
+            middleware: [apiProxy]
         },
         middleware : function(req ,res , next){
             console.log(req);
             next();
         },
         port : 8080,
-        logPrefix : 'Gold'
+        logPrefix : 'Gold',
+        tunnel: true
     });
     gulp.watch(['**/*.html','**/*.css','**/*.js'],{cwd: 'src'},reload);
 });
