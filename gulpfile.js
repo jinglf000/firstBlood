@@ -10,7 +10,8 @@ const gulp = require('gulp'),
     reload      = browserSync.reload,
     // httpProxy   = require('http-proxy'),
     proxy       = require('http-proxy-middleware'),
-    modRewrite  = require('connect-modrewrite');
+    eslint      = require('gulp-eslint');
+    // modRewrite  = require('connect-modrewrite');
     // proxy = httpProxy.createProxyServer({
     //     target : 'http://www.baidu.com',
     //     // target : {
@@ -61,8 +62,22 @@ gulp.task('dev_old',function(){
     })
     gulp.watch('./src/**/*.*',['fileChange']);
 }); 
- 
-gulp.task('dev',function(){
+
+gulp.task('eslint',function(){
+    const lintAndPrint = eslint({
+        configFile : '.eslintrc.js'
+    });
+    lintAndPrint.pipe(eslint.formatEach());
+    return gulp.watch('./src/assest/js/*.js',event => {
+        if (event.type !== 'deleted'){
+            gulp.src(event.path)
+                .pipe(lintAndPrint,{end: false});
+        }
+    })
+    
+}) 
+
+gulp.task('dev',['eslint'],function(){
     browserSync({
         server: {
             baseDir: 'src',
@@ -82,12 +97,12 @@ gulp.task('dev',function(){
             middleware: [apiProxy]
         },
         middleware : function(req ,res , next){
-            console.log(req);
+            // console.log(req);
             next();
         },
         port : 8080,
         logPrefix : 'Gold',
-        tunnel: true
+        tunnel: false
     });
     gulp.watch(['**/*.html','**/*.css','**/*.js'],{cwd: 'src'},reload);
 });
