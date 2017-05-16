@@ -41,7 +41,13 @@ gulp.task('dev',function(){
     browserSync({
         server: {
             baseDir: 'src'
-        }
+        },
+        middleware : function(req ,res , next){
+            console.log(req);
+            next();
+        },
+        port : 8080,
+        logPrefix : 'Gold'
     });
     gulp.watch(['**/*.html','**/*.css','**/*.js'],{cwd: 'src'},reload);
 });

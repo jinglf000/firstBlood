@@ -30,6 +30,8 @@
                             <li><a href="./state/state.html">有限状态机</a></li>
                         </ul>
                     </nav>
+                    <input type="text"  class="form-control" id="path">
+                    <input type="button" id="btn">
                 </div>
                 <div class="col-md-12">
                     <div>
@@ -108,7 +110,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">内容3</div>
+                <div class="col-md-12 row">
+                    
+                </div>
             </div>
         </main>
     </div>
@@ -190,6 +194,19 @@
             }
             tab.initial();
             tab.switchFn(1);
+        });
+    </script>
+    <script>    
+        $(function(){
+            $("#btn").click(function(e){
+                $.ajax({
+                    url : $("#path").val(),
+                    type : 'POST',
+                    success : function(result){
+                        console.log(result);
+                    }
+                })
+            });
         });
     </script>
 </body>
