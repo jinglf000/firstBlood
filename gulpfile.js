@@ -28,8 +28,9 @@ const gulp = require('gulp'),
     //     res.end("代理服务出错啦~~~~~");
     // })
 
-    var apiProxy = proxy('/api',    {
-        target: 'https://translate.google.com.hk/',
+    // http://130.10.9.19:8081/syjyzt/qtgl/grqz/GwssAction.do?method=gwssCx
+    var apiProxy = proxy('/syjyzt',{
+        target: 'http://130.10.9.19:8081',
         changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
         logLevel: 'debug'
     })
@@ -81,10 +82,10 @@ gulp.task('dev',function(){
             // ]
             middleware: [apiProxy]
         },
-        middleware : function(req ,res , next){
-            console.log(req);
-            next();
-        },
+        // middleware : function(req ,res , next){
+        //     console.log(req);
+        //     next();
+        // },
         port : 8080,
         logPrefix : 'Gold',
         tunnel: true
