@@ -11,6 +11,12 @@
     <title>贵阳</title>
     <link rel="stylesheet" href="./assest/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="./assest/css/index.css">
+    <style>
+        .return-msg{
+            font-size: 24px;
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -30,9 +36,14 @@
                             <li><a href="./state/state.html">有限状态机</a></li>
                         </ul>
                     </nav>
-                    <input type="text" id="api" class="form-control" placeholder="api">
+                    <input type="text" id="api" class="form-control" placeholder="用户名">
+                    <input type="text" id="api2" class="form-control" placeholder="密码">
+                    <input type="text" id="check" placeholder="验证码">
+                    <img src="/syjyzt/qtgl/dwzp/DwdlAction.do?method=yzmsc&1494985765971" alt="" id="check-code" >
                     <button id="apiBtn" >API</button>
-                    <p id="msg"></p>
+                    <p class="return-msg">
+                        <span>返回的状态码是：</span><span id="msg"></span>
+                    </p>
                 </div>
                 <div class="col-md-12">
                     <div>
@@ -201,16 +212,26 @@
 
     <script>        
         $(function(){
-            var apiSrc = $("#api");
+
+            var apiUser = $("#api"),
+                apipass = $("#api2"),
+                apiCheck = $("#check"),
+                checkCode = $("#check-code");
+            checkCode.click(function(e){
+                var src = this.src;
+                src = src.slice(0,src.indexOf('&')) + '&' + new Date().getTime();
+                this.src = src;
+            });
+
             $("#apiBtn").click(function(e){
                 $.ajax({
-                    url : 'syjyzt/qtgl/grqz/GwssAction.do?method=gwssCx',
+                    url : 'syjyzt/qtgl/grqz/GrzcAction.do?method=grdl',
                     type : 'post',
-                    data : {'data': JSON.stringify({'gwmcCx':apiSrc.val()})},
+                    data : {'data': JSON.stringify({'sfzhm':apiUser.val(),'mm':apipass.val(),'yzm':apiCheck.val()})},
                     success : function(result){
                         var data = JSON.parse(result);
                         console.log(data);
-                        $("#p").text(data);
+                        $("#msg").text(data.returnData.flag);
                     },
                     error : function(err){
                         console.log('err');

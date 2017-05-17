@@ -22,11 +22,12 @@ en，这是一血
 *   3、jquery  http://www.css88.com/
 *   4、jquery-validation http://www.runoob.com/jquery/jquery-plugin-validate.html
 *   5、JS风格指南 airbnb https://github.com/sivan/javascript-style-guide
+*   6、JS语法校验规则 http://eslint.cn/docs/rules/
 
 ## 开发工作流
-*   1、实时热更新
+*   1、实时热更新 √
 *   2、语法检查
-*   3、本地开发服务，代理接口
+*   3、本地开发服务，代理接口 √
 *   4、打包版本（压缩，自动补全，合并文件）
 
 ## 组件化分析（组件化开发提升代复用，高内聚低耦合；）

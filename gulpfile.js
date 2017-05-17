@@ -8,102 +8,54 @@ const gulp = require('gulp'),
     st          = require('st'),
     browserSync = require('browser-sync'),
     reload      = browserSync.reload,
-    // httpProxy   = require('http-proxy'),
     proxy       = require('http-proxy-middleware'),
+    friendlyFormatter = require('eslint-friendly-formatter'),
     eslint      = require('gulp-eslint');
-    // modRewrite  = require('connect-modrewrite');
-    // proxy = httpProxy.createProxyServer({
-    //     target : 'http://www.baidu.com',
-    //     // target : {
-    //     //     host : '',
-    //     //     port : ''
-    //     // }
-    // });
-
-
-    // proxy.on('error',function(err ,req ,res){
-    //     console.log(err);
-    //     res.writeHead(500, {
-    //         'Content-Type' : 'text/plain'
-    //     });
-    //     res.end("代理服务出错啦~~~~~");
-    // })
 
     // http://130.10.9.19:8081/syjyzt/qtgl/grqz/GwssAction.do?method=gwssCx
+
+gulp.task('eslint',function(){
+    gulp.src('./src/assest/js/base.js')
+        .pipe(eslint({
+            configFile : '.eslintrc.js',
+            fix : true
+        }))
+        .pipe(eslint.format(friendlyFormatter))
+        // .pipe(eslint.failAfterError());
+
+    // return gulp.watch('./src/assest/js/*.js',event => {
+    //     if (event.type !== 'deleted'){
+    //         gulp.src(event.path)
+    //             .pipe(lintAndPrint,{end: false});
+    //     }
+    // })
+    
+}); 
+gulp.task('lint',function(){
+    gulp.watch('./src/assest/js/base.js',['eslint'])
+});
+
+
+gulp.task('dev',['lint'],function(){
+    // proxy
     var apiProxy = proxy('/syjyzt',{
         target: 'http://130.10.9.19:8081',
         changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
         logLevel: 'debug'
     })
 
-// less 编译：
-gulp.task('less',function(){
-    gulp
-    .src('./src/assest/bootstrap/less/bootstrap.less')
-    .pipe(gulp_rename(function(path){
-        console.log(path);
-    }))
-    .pipe(less({// 指定less文件中@import引用文件目录
-        paths: [ path.join(__dirname,'src','assest','bootstrap','less'),path.join(__dirname,'src','assest','bootstrap','less','mixins')]
-    }))
-    .pipe(gulp.dest('./src/assest/bootstrap/css/'));
-});
-
-gulp.task('fileChange',function(){
-    gulp
-    .src('./src/**/*.*')
-    // .pipe(gulp.dest('dist'))
-    .pipe(gulp_refresh());
-});
-
-gulp.task('dev_old',function(){
-    gulp_refresh.listen({
-        basrPath : path.join(__dirname,'src'),
-        port : 8081
-    })
-    gulp.watch('./src/**/*.*',['fileChange']);
-}); 
-
-gulp.task('eslint',function(){
-    const lintAndPrint = eslint({
-        configFile : '.eslintrc.js'
-    });
-    lintAndPrint.pipe(eslint.formatEach());
-    return gulp.watch('./src/assest/js/*.js',event => {
-        if (event.type !== 'deleted'){
-            gulp.src(event.path)
-                .pipe(lintAndPrint,{end: false});
-        }
-    })
-    
-}) 
-
-gulp.task('dev',['eslint'],function(){
+    // borwerSync 
     browserSync({
         server: {
             baseDir: 'src',
-            // middleware : function(req , res ,next ){
-            //     // console.log(req);
-            //     // if(req.originalUrl.indexOf('/apisss/')){
-            //     //     proxy.web(req,res);
-            //     // }
-            //     // next();
-                
-            // }
-            // middleware: [
-            //     modRewrite([
-            //         '^/test/proxy/(.*)$ https://translate.google.com.hk/$1 [P]'
-            //     ])
-            // ]
             middleware: [apiProxy]
         },
-        // middleware : function(req ,res , next){
-        //     console.log(req);
-        //     next();
-        // },
         port : 8080,
         logPrefix : 'Gold',
         tunnel: false
     });
+    
+
     gulp.watch(['**/*.html','**/*.css','**/*.js'],{cwd: 'src'},reload);
+    
 });
