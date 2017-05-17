@@ -351,6 +351,6 @@ define(['jquery','validate','artTemplate'],function($,$validate,template){
             return this.optional(element) || !(length >+params);
         },$.validator.format('请输入小于 {0} 长度的字符，中文算两个'));
     };
-
+    alert(12);
     return base;
 });

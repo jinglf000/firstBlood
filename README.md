@@ -14,13 +14,14 @@ en，这是一血
 *   1、gulp 流程控制工具
 *   2、AMD 加载工具 require.js or esl.js（拉钩）？？
 *   3、jquery artTemplate 确定
-*   4、矢量图标库使用 iconfont
+*   4、矢量图标库使用 iconfont 确定
 
 ## 技术文档
 *   1、artTemplate https://github.com/aui/art-template
 *   2、iconfont http://iconfont.cn/
 *   3、jquery  http://www.css88.com/
 *   4、jquery-validation http://www.runoob.com/jquery/jquery-plugin-validate.html
+*   5、JS风格指南 airbnb https://github.com/sivan/javascript-style-guide
 
 ## 开发工作流
 *   1、实时热更新
