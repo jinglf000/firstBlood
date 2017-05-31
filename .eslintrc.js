@@ -9,7 +9,7 @@ module.exports = {
 		"browser": true,               // browser global variables
 		"amd" : true				   // amd模块规范
     },
-	"globals" : {
+	"globals" : {						// 定义使用的全局变量
 		"template" : false
 	},
     "rules": {
@@ -29,7 +29,7 @@ module.exports = {
 		 */
 		"comma-dangle": [2, "never"],    // 禁用拖尾逗号 {bar : 'baz',qux : 'qex',}
 		"no-cond-assign": [2, "always"], // 禁止条件表达式中出现赋值操作符
-		"no-console": 1,                 // 禁用 console，警告 
+		"no-console": 1,                 // 禁用 console，警告
 		"no-debugger": 1,                // 禁用 debugger，警告
 		"no-alert": 1,                   // 禁用 alert、confirm 和 prompt ，警告
 		"no-constant-condition": 1,      // 禁止在条件中使用常量表达式
@@ -59,7 +59,7 @@ module.exports = {
 		"curly": [2, "multi-line"],      // 要求遵循大括号约定 http://eslint.cn/docs/rules/curly
 		"default-case": 2,               // 要求 switch 语句中有 default 分支 http://eslint.cn/docs/rules/default-case
 		"dot-notation": [2, {            // 要求使用点号，获取对象的属性  http://eslint.cn/docs/rules/dot-notation
-			"allowKeywords": true		 // 
+			"allowKeywords": true		 //
 		}],
 		"eqeqeq": 2,                     // 要求使用 === 和 !== http://eslint.cn/docs/rules/eqeqeq
 		"guard-for-in": 2,               // 要求 for-in 循环中有一个 if 语句 http://eslint.cn/docs/rules/guard-for-in
@@ -133,12 +133,12 @@ module.exports = {
 		"no-lonely-if": 1,               // 禁止 if 语句作为唯一语句出现在 else 语句块中http://eslint.cn/docs/rules/no-lonely-if
 		"no-mixed-spaces-and-tabs": 1,   // 禁止空格和 tab 的混合缩进 http://eslint.cn/docs/rules/no-mixed-spaces-and-tabs
 		"no-multiple-empty-lines": [2, { // 禁止出现多行空行 最多为两行 http://eslint.cn/docs/rules/no-multiple-empty-lines
-			"max": 2						
+			"max": 2
 		}],
 		"no-nested-ternary": 2,          // 禁用嵌套的三元表达式 http://eslint.cn/docs/rules/no-nested-ternary
 		"no-new-object": 2,              // 禁用 Object 的构造函数 http://eslint.cn/docs/rules/no-new-object
 		"func-call-spacing": [2,         // 方法名和调用之间没有空格 http://eslint.cn/docs/rules/no-spaced-func
-			 "never"],         
+			 "never"],
 		"no-trailing-spaces": 2,         // 禁用行尾空白 http://eslint.cn/docs/rules/no-trailing-spaces
 		"no-extra-parens": [2, "functions"], // 只在 函数表达式周围禁止不必要的圆括号 http://eslint.cn/docs/rules/no-extra-params
 		// "one-var": [1, "always"],         //  要求每个作用域有一个变量声明 http://eslint.cn/docs/rules/one-var

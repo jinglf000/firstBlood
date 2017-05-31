@@ -1,0 +1,18 @@
+
+root = true
+[*]
+# 缩进样式 tab键 4个
+indent_style = tab
+indent_size = 4
+
+# 编码格式
+charset = utf-8
+
+# 去除尾随空格，末尾插入空行
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = lf
+
+[*.md]
+trim_trailing_whitespace = false
+

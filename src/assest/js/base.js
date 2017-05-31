@@ -33,36 +33,34 @@ define(['jquery', 'validate', 'artTemplate'], function ($, $validate, template) 
 		uiRender = {};
 	// select 组件
 	uiList = [{
-			type: 'uiSelect',
-			str: '<div class="ui-select-con">' +
+		type: 'uiSelect',
+		str: '<div class="ui-select-con">' +
 				'<ul>' +
 				'{{each list}}' +
 				'<li data-id="{{$value.id}}" data-name="{{$value.name}}" data-param={{$value.param}}>{{$value.name}}</li>' +
 				'{{/each}}' +
 				'</ul>' +
 				'</div>'
-		},
-		{
-			type: 'uiMsgSuccess',
-			str: '<div class="msgSuccess">' +
+	},
+	{
+		type: 'uiMsgSuccess',
+		str: '<div class="msgSuccess">' +
 				'<i class="iconfont icon-msg-success"></i>' +
 				'<p class="content">{{msg}</p>' +
 				'</div>'
-		}
+	}
 	];
-
 	uiList.forEach(function (value) {
 		uiRender[value.type] = template.compile(value.str);
 	});
 	$('body').data('uiRender', uiRender);
-
 	/**
 	 * 获取表单值，实际调用方法
 	 * @param  {Funtion} getMethod 处理方式
 	 * @return {Function} 获取form表单里面的数据的方法--
 	 * @description  {JQuery} $form form的jquery对象；
 	 */
-	function getForm(getMethod) {
+	function getForm (getMethod) {
 		return function ($form) {
 			var obj = {};
 			$form.find('input, textarea, select').each(function (index, ele) {
@@ -129,13 +127,13 @@ define(['jquery', 'validate', 'artTemplate'], function ($, $validate, template) 
 	 * @param {slector} selector jquery选择符
 	 * @returns {Funtion} renderFn 渲染函数
 	 */
-	function getRenderFn(selector) {
+	function getRenderFn (selector) {
 		var $ele = $(selector),
 			str = $ele.html();
 		$ele.remove();
 		return template.compile(str);
 	}
-	// 为jquery扩展方法extend 
+	// 为jquery扩展方法extend
 	$.extend({
 		'getFormData': getForm('fromName'),
 		'getRenderFn': getRenderFn,
@@ -148,8 +146,8 @@ define(['jquery', 'validate', 'artTemplate'], function ($, $validate, template) 
 			setTimeout(function () {
 				$ele.fadeOut(function () {
 					$ele.remove();
-				})
-			}, duration)
+				});
+			}, duration);
 		}
 	});
 

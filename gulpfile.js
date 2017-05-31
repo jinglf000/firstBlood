@@ -15,24 +15,16 @@ const gulp = require('gulp'),
     // http://130.10.9.19:8081/syjyzt/qtgl/grqz/GwssAction.do?method=gwssCx
 
 gulp.task('eslint',function(){
-    gulp.src('./src/assest/js/base.js')
+    gulp.src('./src/assest/js/*.js')
         .pipe(eslint({
             configFile : '.eslintrc.js',
             fix : true
         }))
-        .pipe(eslint.format(friendlyFormatter))
-        // .pipe(eslint.failAfterError());
-
-    // return gulp.watch('./src/assest/js/*.js',event => {
-    //     if (event.type !== 'deleted'){
-    //         gulp.src(event.path)
-    //             .pipe(lintAndPrint,{end: false});
-    //     }
-    // })
+        .pipe(eslint.format(friendlyFormatter));
     
 }); 
 gulp.task('lint',function(){
-    gulp.watch('./src/assest/js/base.js',['eslint'])
+    gulp.watch('./src/assest/js/*.js',['eslint'])
 });
 
 
@@ -50,7 +42,7 @@ gulp.task('dev',['lint'],function(){
             baseDir: 'src',
             middleware: [apiProxy]
         },
-        port : 8080,
+        port : 8081,
         logPrefix : 'Gold',
         tunnel: false
     });
