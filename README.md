@@ -45,3 +45,9 @@ en，这是一血
 > gulp-jshint：jshint 检查
 > gulp-imagemin：压缩 jpg、png、gif 等图片
 > gulp-livereload：当代码变化时，它可以帮我们自动刷新页面
+
+## vscode 推荐插件
+* 	Beautify 美化
+* 	Document This  jsDoc
+*	EditorConfig for VS code 编辑器配置
+* 	
