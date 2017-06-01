@@ -46,8 +46,14 @@ en，这是一血
 > gulp-imagemin：压缩 jpg、png、gif 等图片
 > gulp-livereload：当代码变化时，它可以帮我们自动刷新页面
 
-## vscode 推荐插件
-* 	Beautify 美化
-* 	Document This  jsDoc
+## vscode 推荐插件（项目）
+* 	Document This  jsDoc风格的注释
 *	EditorConfig for VS code 编辑器配置
-* 	
+* 	ESlint 	语法检查
+*	Image Preview 图片预览
+* 	Path Intellisense 路径自动补全
+*	View In Browser 	在浏览器中查看
+*	vscode-icons	文件图标
+## 本地gitlab仓库
+*	注册与登录 http://130.10.8.210/users/sign_in
+* 	gitlab使用指南 http://130.10.8.207/gitlab-guide/_book/

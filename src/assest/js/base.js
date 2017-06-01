@@ -4,7 +4,7 @@
  */
 define(['jquery', 'validate', 'artTemplate'], function ($, $validate, template) {
 	var base = {
-		PATH: '././'
+		PATH: './'
 	};
 
 	//  validate 中文提示
