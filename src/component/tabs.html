@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>tabs 缩进组件思路</title>
+	<style>
+		body{
+			background-color: #fff;
+		}
+		.tab-container{
+			background-color: #fff;
+		}
+		.tab-container .nav{
+			list-style: none;
+			border-bottom: 2px solid #eaeaea;
+		}
+		.tab-container .nav:after {
+			clear:both;
+			content: '';
+			display: block;
+		}
+		.tab-container .nav li {
+			float: left;
+			padding: 5px 20px;
+			position: relative;
+			top: 2px;
+			/*border: 2px solid #fff;*/
+		}
+		.tab-container .nav li.active{
+			z-index: 2;
+			border: 2px solid #eaeaea;
+			border-bottom: 2px solid #fff;
+		}
+		.tab-container .content > div{
+			display: none;
+			/*transition: all ease .5s;*/
+		}
+		.tab-container .content > div.active{
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- li,div激活状态添加的class为active -->
+	<!-- li的for属性对应了内容容器的name属性，必须的有外部包裹 -->
+	<!-- nav 对应的导航，content 对应的内容，这是保留属性，所有的内容都放 -->
+	<div class="tab-container">
+		<ul class="nav nav-tabs">
+			<li for="area1" class="active"><a href="javascript:;">tab1</a></li>
+			<li for="area2"><a href="javascript:;">tab2</a></li>
+			<li for="area3"><a href="javascript:;">tab3</a></li>
+		</ul>
+		<div class="content">
+			<div name="area1">这是一个内容</div>
+			<div name="area2">这里是第二个内容部分</div>
+			<div name="area3">这里是第三个内容部分</div>
+		</div>
+	</div>
+	<div class="tab-container">
+		<ul class="nav nav-tabs">
+			<li for="area1" class="active"><a href="javascript:;">tab1</a></li>
+			<li for="area2"><a href="javascript:;">tab2</a></li>
+			<li for="area3"><a href="javascript:;">tab3</a></li>
+		</ul>
+		<div class="content">
+			<div name="area1">这是一个内容</div>
+			<div name="area2">这里是第二个内容部分</div>
+			<div name="area3">这里是第三个内容部分</div>
+		</div>
+	</div>
+<script src="../assest/js/lib/jquery.min.js"></script>
+<script>
+	//  jquery 扩展式写法
+	$.fn.extend({
+		'tabs' : function(){
+			var $this = $(this),
+				$nav  = $this.find('.nav'),
+				$con  = $this.find('.content'),
+				active = 'active',
+				actives = '.' + active;
+			show($nav.find(' .active'));
+			// 事件绑定
+			$this.on('click','.nav > li',function(e){
+				var _$this = $(this);
+				if(_$this.hasClass(active)){return}
+				show(_$this);
+			});
+			// showFn
+			function show($ele){
+				var _for = $ele.attr('for');
+				$(actives, $nav).removeClass(active);
+				$ele.addClass(active);
+				$(actives, $con).removeClass(active);
+				$con.find('[name="' + _for + '"]').addClass(active);
+			}
+		}
+	})
+	$('.tab-container').tabs();
+
+	// 使用原型的思想去定义插件
+	// 在构造函数中 实现事件绑定，初始化操作，DOM（很占性能）缓存
+	// 使用options对象对插件进行配置
+	// 使用原型的方法做工具方法以供重复使用
+	// 分层--->抽出公用方法 放到原型上 ---> 私有方式使用 构造函数完成初始化 ---> 传递options对象，并提供钩子方法（状态改变的方法）
+</script>
+</body>
+
+</html>
