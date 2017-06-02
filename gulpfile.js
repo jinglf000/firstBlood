@@ -21,14 +21,14 @@ gulp.task('eslint',function(){
             fix : true
         }))
         .pipe(eslint.format(friendlyFormatter));
-    
-}); 
+
+});
 gulp.task('lint',function(){
     gulp.watch('./src/assest/js/*.js',['eslint'])
 });
 
 
-gulp.task('dev',['lint'],function(){
+gulp.task('dev',function(){
     // proxy
     var apiProxy = proxy('/syjyzt',{
         target: 'http://130.10.9.19:8081',
@@ -36,7 +36,7 @@ gulp.task('dev',['lint'],function(){
         logLevel: 'debug'
     })
 
-    // borwerSync 
+    // borwerSync
     browserSync({
         server: {
             baseDir: 'src',
@@ -46,8 +46,7 @@ gulp.task('dev',['lint'],function(){
         logPrefix : 'Gold',
         tunnel: false
     });
-    
 
     gulp.watch(['**/*.html','**/*.css','**/*.js'],{cwd: 'src'},reload);
-    
+
 });

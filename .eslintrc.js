@@ -21,7 +21,8 @@ module.exports = {
 		"no-shadow-restricted-names": 2, // 禁止覆盖受限制的标识符
 		"no-unused-vars": [2, {          // http://eslint.cn/docs/rules/no-unused-vars
 			"vars": "local", 			 // vars[local,all];local仅仅检测本作用域中声明的变量是否使用，允许不使用全局环境中的变量。
-			"args": "after-used"		 // 最后一个参数必须使用。如：一个函数有两个参数，你使用了第二个参数，ESLint 不会报警告。
+			"args": "none"		 		// 最后一个参数必须使用。如：一个函数有两个参数，你使用了第二个参数，ESLint 不会报警告。
+										// none 不检查函数的参数
 		}],
 
 		/**

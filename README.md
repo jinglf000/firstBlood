@@ -54,6 +54,16 @@ en，这是一血
 * 	Path Intellisense 路径自动补全
 *	View In Browser 	在浏览器中查看
 *	vscode-icons	文件图标
+
 ## 本地gitlab仓库
 *	注册与登录 http://130.10.8.210/users/sign_in
 * 	gitlab使用指南 http://130.10.8.207/gitlab-guide/_book/
+
+## 学习资料
+*	前端开发手册: http://fe.leozhang2018.me/
+* 	NodeJS: 七天学会NodeJS http://nqdeng.github.io/7-days-nodejs/
+* 	NodeJS:	极客学院	http://www.jikexueyuan.com/course/nodedotjs/?pageNum=1
+*	NodeJS:	IBM 	https://www.ibm.com/developerworks/cn/cloud/library/cl-nodejscloud/
+*  	NodeJS: Node.js  开发指南 https://github.com/threerocks/studyFiles/blob/master/%E7%94%B5%E5%AD%90%E4%B9%A6/Node.js%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97_%E4%B8%AD%E6%96%87%E6%AD%A3%E7%89%88.pdf
+*　 深入浅出Nodejs 	 https://zhuanlan.zhihu.com/p/26107559
+
