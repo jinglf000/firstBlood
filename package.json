@@ -54,6 +54,7 @@
     "jquery": "^1.9.1",
     "less": "^2.7.2",
     "normalize.css": "^3.0.3",
+    "oppressor": "0.0.1",
     "r.js": "^1.0.3",
     "require.js": "^1.0.0",
     "st": "^1.2.0",
