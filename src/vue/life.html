@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>vue生命周期</title>
+</head>
+<body>
+	<div id="app">
+		<p>{{msg}}</p>
+		<p>现在时间{{date}}</p>
+		<p v-on:click='say(msg)'>{{github}}</p>
+	</div>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="../assest/js/lib/jquery.min.js"></script>
+	<script>
+		var app = new Vue({
+			el : '#app',
+			// data 里面只能是简单的js对象，对象里可嵌套，但不能是函数
+			data : {
+				msg : '这是一个使用Vue的app',
+				github: '请稍等...'
+			},
+			computed: {
+				// 使用computed会追踪计算的值和date对象里面值的依赖关系，
+				// 当data值不变的时候，对应的computed也不会变，同理data值变com也会变
+				// com和watch的思想是相反的，watch是原因值变---->获得相应的结果；从前往后
+				// com 获得最后的结果，---> 依赖于某个具体的原因；从后往前
+				date: function () {
+					var time = new Date();
+					console.log(time);
+					return time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate();
+				},
+				ajaxGithub: function (){
+					return $.get('https:api.github.com/user/orgs').then(function (data){
+						this.github = data.message;
+					}.bind(this));
+				}
+			},
+			methods: {
+				getAjax: function (){
+					$.get('https:api.github.com/user/orgs').done(function(data){
+						this.github = data.message;
+					}.bind(this))
+					.error(function (data){
+						console.log(data);
+						this.github = JSON.parse(data.responseText).message;
+					}.bind(this));
+				},
+				say: function (msg) {
+					alert(msg);
+				}
+			},
+			watch: {
+				// watch函数相当于，在把data转换为存取器属性的时候，（当然肯定）所添加的自定义函数
+				// （当然在data对象，在转换为存取器属性get/set的时候，肯定会添加内部的函数，这是实现响应式数据的原理）
+				// 使用watch可以执行异步操作，computed不能，同步操作；
+				a: function (val, oldval) {
+					console.log('new: %s, old: %s', old, oldval);
+				}
+			},
+			// Vue 把传入的options对象转换为 this对象的$options
+			beforeCreate: function () {
+				console.group('beforeCreate 创建前 ======================');
+				console.log(this);
+				console.log(this instanceof Vue);
+			},
+			// 此时已经把data变成存取器对象
+			created: function () {
+				console.group('create 创建 =======================');
+				console.log(this);
+				this.getAjax();
+			},
+			// 已经获得了模板；$el和template同时存在，被render template。否则$el，两者必须存在一个
+			beforeMount: function () {
+				console.group('beforeMount 在Mount之前');
+				console.log(this);
+			},
+			// 内容已经被渲染后的内容给替换
+			// mounted 指的是页面初始渲染完毕，mounted只会执行一次，其余的数据变化算作更新；
+			// 此时DOM已经存在
+			mounted: function () {
+				console.group('y已经 mounted 了？？？');
+				console.log(this);
+				console.groupEnd();
+			},
+			// 在即将更新之前
+			beforeUpdate: function () {
+				console.group('data 更新之前');
+				console.log(this);
+			},
+			// 更新操作已经完成
+			// 更新操作完成后，DOM存在了（为更新完之后的DOM）可以执行DOM操作了
+			updated: function () {
+				console.group('data ge更新了');
+				console.log(this);
+			}
+		});
+
+
+	</script>
+</body>
+</html>
