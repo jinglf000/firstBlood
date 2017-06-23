@@ -7,9 +7,9 @@
  *
  */
 define(['jquery'], function ($) {
-	function Title (options) {
+	// function Title (options) {
 
-	}
+	// }
 
 
 	$.fn.extend({

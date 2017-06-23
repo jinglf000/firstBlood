@@ -1,244 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge;chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Pragma"  content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>贵阳</title>
-    <link rel="stylesheet" href="./assest/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="./assest/css/index.css">
-    <style>
-        .return-msg{
-            font-size: 24px;
-            color: red;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>登录</title>
+	<link rel="stylesheet" href="./assest/bootstrap/css/bootstrap.css">
+	<style>
+		.container{
+			width: 1000px;
+			padding: 200px 0;
+		}
+	</style>
 </head>
+
 <body>
-    <div class="container-fluid">
-        <nav>
-            <div class="row switch-btn main-width" id="switch-btn">
-                <span class="col-md-2 ">目录</span>
-                <span class="col-md-2">icon图标</span>
-                <span class="col-md-2">栏目3</span>
-            </div>
-        </nav>
-        <main>
-            <div class="row switch-con main-width" id="switch-con">
-                <div class="col-md-12 choiced-con row">
-                    <nav>
-                        <ul>
-                            <li><a href="./yang/yang.html">贵阳人力资源网</a></li>
-                            <li><a href="./state/state.html">有限状态机</a></li>
-                        </ul>
-                    </nav>
-                    <input type="text" id="api" class="form-control" placeholder="用户名">
-                    <input type="text" id="api2" class="form-control" placeholder="密码">
-                    <input type="text" id="check" placeholder="验证码">
-                    <button id="apiBtn" >API</button>
-                    <p class="return-msg">
-                        <span>返回的状态码是：</span><span id="msg"></span>
-                    </p>
-                </div>
-                <div class="col-md-12">
-                    <div>
-                       <div class="row">
-                           <p>
-                                <span class="icon-font icon-follow"></span>
-                                <span>字体图标示例</span>
-                            </p>
-                            <p>通过zeplin导出对应的svg图标，上传到<a href="http://iconfont.cn">iconfont.cn</a>制作出对应的字体图标，更新图标，下载使用（图标内容地址为iconfont提供）</p>
-                        </div>
-                        <div class="row">
-                            <table class="table table-hover">
-                                <caption>bootstrap的表格</caption>
-                                <thead>
-                                    <tr >
-                                        <th>#</th>
-                                        <th>姓名</th>
-                                        <th>年龄</th>
-                                        <th>身高</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr >
-                                        <td>1</td>
-                                        <td>周霖</td>
-                                        <td>23</td>
-                                        <td>165</td>
-                                    </tr>
-                                    <tr class="active">
-                                        <td>2</td>
-                                        <td>荆龙飞</td>
-                                        <td>24</td>
-                                        <td>180</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>孙欣然</td>
-                                        <td>26</td>
-                                        <td>170</td>
-                                    </tr>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <h3>form表单</h3>
-                            <form action="" class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="username" class="col-md-3 control-label">Username：</label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="username" class="form-control" placeholder="username">
-                                        <small class="input-right-msg visib-hidden"><span class="icon-font icon-right"></span>您的账号可用</small>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">password：</label>
-                                    <div class="col-md-9">
-                                        <input type="password" id="password" class="form-control" placeholder="passworld">
-                                        <!--<small>请输入6-12位的，包含数字和字母的密码</small>-->
-                                        <small class="input-error-msg"><span class="icon-font icon-error"></span>你输入的密码太过于简单</small>
-                                    </div>
-                                </div>
-                                <div class="form-group has-success  ">
-                                    <label for="remark" class="col-sm-3 control-label">备注信息：</label>
-                                    <div class="col-md-9 has-feedback">
-                                        <textarea name="" id="remark" cols="30" rows="3" class="form-control"></textarea>
-                                        <span class="help-block">帮助信息</span>
-                                        <span class="icon-font icon-right form-control-feedback"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-9 col-md-offset-3">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox">remember me</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 row">
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" id="login-form">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">用户名：</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" id="username" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-3 control-label">密码：</label>
+					<div class="col-sm-5">
+						<input type="password" class="form-control" id="password" placeholder="Password">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-5">
+						<button type="submit" class="btn btn-default" id="login">登录</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="./assest/js/lib/jquery.min.js"></script>
+	<script>
+		var interface = {
+			login: {
+				url: 'api/login'
+			}
+		}
+	</script>
+	<script>
+		$(function () {
+			var $user = $("#username");
+			var $pass = $("#password");
 
-                </div>
-            </div>
-        </main>
-    </div>
-    <div class="box">
-        <pre>
-            <code>
-            .box{
-                position: absolute;
-                /*top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                margin: auto;*/
-                width: 400px;
-                height: 400px;
-                top: 50%;
-                left: 50%;
-                margin-left: -200px;
-                margin-right: -200px;
-                background-color: #ccc;
-                border-radius: 12px;
-                box-shadow: 0 2px 6px #ccc;
-            }
-            </code>
-        </pre>
-    </div>
-    <div class="div-fix">
-        <pre>
-        <code>
-         .div-fix{
-            display: none;
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            border-radius: 12px;
-            background-color: #2997d0;
-            /*left: 50%;
-            top: 50%;
-            margin-left: -100px;
-            margin-top: -100px;*/
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-        }
-        </code>
-        </pre>
-    </div>
-    <script src="./assest/jquery/jquery.min.js"></script>
-    <script>
-        $(function(){
+			$("#login-form").submit(function (e) {
+				e.preventDefault();
+				$.ajax({
+					url: interface.login.url,
+					method: "POST",
+					data: {
+						username: $user.val(),
+						password: $pass.val()
+					}
+				}).done(function (result) {
+					console.log(result);
+					alert(JSON.stringify(result));
+				}).fail(function (result) {
+					console.log(result);
+				})
+			});
+		});
 
-            var tab = {
-                currentState : 0,
-                $btn : $("#switch-btn"),
-                $btnList : $("#switch-btn span"),
-                BTN_ON : 'choiced-btn',
-                $con : $("#switch-con"),
-                $conList : $("#switch-con div"),
-                CON_ON : 'choiced-con',
-                initial : function(){
-                    var self = this;
-                    self.$btn.on("click",self.transition);
-                },
-                transition : function(e){
-                    var $this = $(this),
-                        num   = $(e.target).index();
-                        if(num === tab.currentState)return;
-                    tab.switchFn(num);
-                },
-                switchFn : function(num){
-                    tab.currentState = num;
-                    tab.$btnList.removeClass(tab.BTN_ON)
-                        .eq(num).addClass(tab.BTN_ON);
-                    tab.$conList.removeClass(tab.CON_ON)
-                        .eq(num).addClass(tab.CON_ON);
-                }
-            }
-            tab.initial();
-            tab.switchFn(1);
-        });
-    </script>
-
-    <script>
-        $(function(){
-
-            var apiUser = $("#api"),
-                apipass = $("#api2"),
-                apiCheck = $("#check"),
-                checkCode = $("#check-code");
-            checkCode.click(function(e){
-                var src = this.src;
-                src = src.slice(0,src.indexOf('&')) + '&' + new Date().getTime();
-                this.src = src;
-            });
-
-            $("#apiBtn").click(function(e){
-                $.ajax({
-                    url : 'syjyzt/qtgl/grqz/GrzcAction.do?method=grdl',
-                    type : 'post',
-                    data : {'data': JSON.stringify({'sfzhm':apiUser.val(),'mm':apipass.val(),'yzm':apiCheck.val()})},
-                    success : function(result){
-                        var data = JSON.parse(result);
-                        console.log(data);
-                        $("#msg").text(data.returnData.flag);
-                    },
-                    error : function(err){
-                        console.log('err');
-                        console.log(err);
-                    }
-                })
-            });
-        });
-    </script>
+	</script>
 </body>
+
 </html>
