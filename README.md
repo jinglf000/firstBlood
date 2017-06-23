@@ -4,14 +4,14 @@ en，这是一血
 -----
 ## 目录：
 
-### [问题列表](#question)
-### [技术方向](#power)
-### [技术文档](#document)
-### [开发工作流](#workflow)
-### [gulp插件](#gulp)
-### [VScode推荐插件](#vscode)
-### [本地gitlab](#local)
-### [学习资源](#source)
+#### [问题列表](#question)
+#### [技术方向](#power)
+#### [技术文档](#document)
+#### [开发工作流](#workflow)
+#### [gulp插件](#gulp)
+#### [VScode推荐插件](#vscode)
+#### [本地gitlab](#local)
+#### [学习资源](#source)
 
 
 <h2 id="question">贵阳项目（问题列表）</h2>
