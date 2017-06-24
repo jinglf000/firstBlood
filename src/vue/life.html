@@ -39,6 +39,7 @@
 				}
 			},
 			methods: {
+				// 定义的方法，可以在事件绑定的时候使用，也可以在watch、computed、钩子函数中使用
 				getAjax: function (){
 					$.get('https:api.github.com/user/orgs').done(function(data){
 						this.github = data.message;

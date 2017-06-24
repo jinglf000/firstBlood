@@ -10,7 +10,8 @@ const gulp = require('gulp'),
     reload      = browserSync.reload,
     proxy       = require('http-proxy-middleware'),
     friendlyFormatter = require('eslint-friendly-formatter'),
-    eslint      = require('gulp-eslint');
+    eslint      = require('gulp-eslint'),
+	consoleClear = require('cli-clear');
 
     // http://130.10.9.19:8081/syjyzt/qtgl/grqz/GwssAction.do?method=gwssCx
 
@@ -21,6 +22,7 @@ gulp.task('eslint',function(){
             fix : true
         }))
         .pipe(eslint.format(friendlyFormatter));
+	consoleClear();// 友好的输入内容
 
 });
 gulp.task('lint',function(){
