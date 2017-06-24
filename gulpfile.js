@@ -25,30 +25,32 @@ gulp.task('eslint',function(){
 	consoleClear();// 友好的输入内容
 
 });
-gulp.task('lint',function(){
-    gulp.watch('./src/assest/js/*.js',['eslint'])
+gulp.task('lint', function () {
+	gulp.watch('./src/assest/js/*.js', ['eslint']);
 });
 
 
-gulp.task('dev',function(){
-    // proxy
-    var apiProxy = proxy('/syjyzt',{
-        target: 'http://130.10.9.19:8081',
-        changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
-        logLevel: 'debug'
-    })
+gulp.task('dev', function () {
+	// proxy
+	var apiProxy = proxy(['/api', '/syjyztc'], {
+		// target: 'http://localhost:10000/mock/5938ab8c09fc2a0bac8a2c60/',
+		// target: 'http://localhost:36742',
+		target: 'http://130.10.9.26:10000/mock/593946d182ba6613dc6e4895',
+		changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
+		logLevel: 'debug'
+	});
 
-    // borwerSync
-    browserSync({
-        server: {
-            baseDir: 'src',
-            middleware: [apiProxy]
-        },
-        port : 8081,
-        logPrefix : 'Gold',
-        tunnel: false
-    });
 
-    gulp.watch(['**/*.html','**/*.css','**/*.js'],{cwd: 'src'},reload);
+	// borwerSync
+	browserSync({
+		server: {
+			baseDir: 'src',
+			middleware: [apiProxy]
+		},
+		port: 8080,
+		logPrefix: 'Gold',
+		tunnel: false
+	});
 
+	gulp.watch(['**/*.html', '**/*.css', '**/*.js'], { cwd: 'src' }, reload);
 });
