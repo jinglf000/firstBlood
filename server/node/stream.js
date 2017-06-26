@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //  流
 
 'use strict';
@@ -29,7 +28,6 @@ ws1.write('而不是使用fs.模块中的write来进行写文件的操作');
 ws1.write('end');
 ws1.end();
 
-=======
 // var fs = require('fs');
 
 // fs.readFile('../movie.rmvb', function (err, data) {
@@ -67,4 +65,3 @@ class ToReadable extends Readable {
 }
 
 module.exports = ToReadable;
->>>>>>> 1dcdb8c9aa32960758a5d339c1d3024dfdb03932
