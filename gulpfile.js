@@ -1,26 +1,29 @@
 // 使用gulp来做打包发布工作
-var gulp = require('gulp'),
-	path = require('path'),
-	less = require('gulp-less'),
-	gulp_rename = require('gulp-rename'),
-	gulp_refresh = require('gulp-refresh'),
-	http = require('http'),
-	st = require('st'),
-	browserSync = require('browser-sync'),
-	reload = browserSync.reload,
-	proxy = require('http-proxy-middleware'),
-	friendlyFormatter = require('eslint-friendly-formatter'),
-	eslint = require('gulp-eslint');
+const gulp = require('gulp'),
+    path = require('path'),
+    less = require('gulp-less'),
+    gulp_rename = require('gulp-rename'),
+    gulp_refresh = require('gulp-refresh'),
+    http        = require('http'),
+    st          = require('st'),
+    browserSync = require('browser-sync'),
+    reload      = browserSync.reload,
+    proxy       = require('http-proxy-middleware'),
+    friendlyFormatter = require('eslint-friendly-formatter'),
+    eslint      = require('gulp-eslint'),
+	consoleClear = require('cli-clear');
 
-// http://130.10.9.19:8081/syjyzt/qtgl/grqz/GwssAction.do?method=gwssCx
+    // http://130.10.9.19:8081/syjyzt/qtgl/grqz/GwssAction.do?method=gwssCx
 
-gulp.task('eslint', function () {
-	gulp.src('./src/assest/js/*.js')
-		.pipe(eslint({
-			configFile: '.eslintrc.js',
-			fix: true
-		}))
-		.pipe(eslint.format(friendlyFormatter));
+gulp.task('eslint',function(){
+    gulp.src('./src/assest/js/*.js')
+        .pipe(eslint({
+            configFile : '.eslintrc.js',
+            fix : true
+        }))
+        .pipe(eslint.format(friendlyFormatter));
+	consoleClear();// 友好的输入内容
+
 });
 gulp.task('lint', function () {
 	gulp.watch('./src/assest/js/*.js', ['eslint']);

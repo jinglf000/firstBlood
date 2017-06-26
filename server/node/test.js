@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // node 进程测试
 // 当前文档就是主进程
 const fs  = require('fs');
@@ -38,4 +39,24 @@ cp.on('message', function (m) {
 });
 
 // childExec('clear');
+=======
+var ToReadable = require('./stream');
+
+const iterator = function (limit) {
+	return {
+		next: function() {
+			if(limit --){
+				return {
+					done: false,
+					value: limit + Math.random()
+				}
+			}
+			return {
+				done: true
+			}
+		}
+	}
+}(1e10);
+
+>>>>>>> 1dcdb8c9aa32960758a5d339c1d3024dfdb03932
 
