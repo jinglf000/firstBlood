@@ -16,3 +16,4 @@ read.on('data', function (data) {
 	console.log(util.inspect(str.length, {color: true}));
 });
 
+
