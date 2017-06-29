@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var gullpSequence = require('run-sequence');
+var gullpSequence = require('gulp-requence');
 
 gulp.task('zero', function () {
 	return gulp.src('./src/**/*.html')
