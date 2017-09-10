@@ -3,16 +3,9 @@
 // http://eslint.cn/docs/rules/
 
 module.exports = {
-	"ecmaVersion" : 5,
-	"sourceType" : 'script',
-	"env": {                           // http://eslint.cn/docs/user-guide/configuring.html#specifying-environments
-		"browser": true,               // browser global variables
-		"amd" : true				   // amd模块规范
-    },
-	"globals" : {						// 定义使用的全局变量
-		"template" : false
-	},
-    "rules": {
+	"ecmaVersion" : 2017,
+	"sourceType" : 'module',
+	"rules": {
 		"strict": 0,                     // 不启用严格模式
 		/**
 		 * Variables
